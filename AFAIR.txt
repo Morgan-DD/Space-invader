@@ -1,0 +1,7 @@
+
+
+- faire les tests unitaires
+
+- mise en page du document et converion en PDF et Bon nom
+
+- check sur le livrable de la semaine 40 (cette semaine)
