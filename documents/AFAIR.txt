@@ -2,8 +2,8 @@ Fichier contenant normalement le contenu des prochains livrables
 
 
 
-- faire les tests unitaires
+- avancer dans le code
 
-- mise en page du document et converion en PDF et Bon nom
+- completer le canavas avec les enciènnes données et le completer avec de nouvelles données
 
-- check sur le livrable de la semaine 40 (cette semaine)
+- 

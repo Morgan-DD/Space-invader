@@ -2,7 +2,9 @@
 space invaders dans le projet P-Dev 2em
 Auteur: Dussault Morgan
 
-
+Prochaine echeance :
+	Beta 1 
+	Dimmanche 13 novembre (9 novembre)
 
 livrables:
 	contient le fichier du livrable suivant (si commencé ou fini)
@@ -27,3 +29,7 @@ documents:
 
 code:
 	contient le code du projet (ainsi que les tests unitaires)
+
+
+ecriture.txt
+	contient les differants grands texts a afficher (dans le menu pour l'insatant)
