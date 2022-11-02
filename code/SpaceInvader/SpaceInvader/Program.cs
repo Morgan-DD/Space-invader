@@ -8,58 +8,75 @@ namespace SpaceInvader
 {
     class Program
     {
-        public string[,] tab_values = new string[5, 2];
-        /*
-        {
-            {"                              _____                        _____                    _\n                             /  ___|                      |_   _|                  | |\n                             \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __\n                              `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                             /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |\n                             \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|\n                                   | |\n                                   |_|",
-             "                                                   ___\n                                                  |_  |\n                                                    | | ___  _   _  ___ _ __ \n                                                    | |/ _ \\| | | |/ _ \\ '__|\n                                                /\\__/ / (_) | |_| |  __/ |\n                                                \\____/ \\___/ \\__,_|\\___|_|",
-            }
-        };*/
-
-        tab_values[0,0] = "";
-        const string playTitle = "                                                   ___\n                                                  |_  |\n                                                    | | ___  _   _  ___ _ __ \n                                                    | |/ _ \\| | | |/ _ \\ '__|\n                                                /\\__/ / (_) | |_| |  __/ |\n                                                \\____/ \\___/ \\__,_|\\___|_|";
-        const int playLocation = 12;
-
-        const string settingTitle = "                                              _____       _   _\n                                             |  _  |     | | (_)\n                                             | | | |_ __ | |_ _  ___  _ __  ___\n                                             | | | | '_ \\| __| |/ _ \\| '_ \\/ __|\n                                             \\ \\_/ / |_) | |_| | (_) | | | \\__ \\\n                                              \\___/| .__/ \\__|_|\\___/|_| |_|___/\n                                                   | |\n                                                   |_|";
-        const int settingsLocation = 19;
-
-        const string hightScoreTitle = "                                      _   _ _       _     _   _____\n                                     | | | (_)     | |   | | /  ___|\n                                     | |_| |_  __ _| |__ | |_\\ `--.  ___ ___  _ __ ___\n                                     |  _  | |/ _` | '_ \\| __|`--. \\/ __/ _ \\| '__/ _ \\\n                                     | | | | | (_| | | | | |_/\\__/ / (_| (_) | | |  __/\n                                     \\_| |_/_|\\__, |_| |_|\\__\\____/ \\___\\___/|_|  \\___|\n                                               __/ |\n                                              |___/";
-        const int hightLocation = 28;
-
-        const string detailTitle = "                                             ___   ______\n                                            / _ \\  | ___ \\\n                                           / /_\\ \\ | |_/ / __ ___  _ __   ___  ___                 \n                                           |  _  | |  __/ '__/ _ \\| '_ \\ / _ \\/ __|\n                                           | | | | | |  | | | (_) | |_) | (_) \\__ \\\n                                           \\_| |_/ \\_|  |_|  \\___/| .__/ \\___/|___/\n                                                                  | |\n                                                                  |_|";
-        const int detailLocation = 37;
-
-        const string leaveTitle = "                                                _____       _ _   _\n                                               |  _  |     (_) | | |\n                                               | | | |_   _ _| |_| |_ ___ _ __\n                                               | | | | | | | | __| __/ _ \\ '__|\n                                               \\ \\/' / |_| | | |_| ||  __/ |\n                                                \\_/\\_\\__,_|_|\\__|\\__\\___|_|";
-        const int leaveLocation = 46;
 
 
+
+        const short invaderLocation = 2;
+        const short playLocation = 12;
+        const short settingsLocation = 21;
+        const short hightLocation = 28;
+        const short detailLocation = 37;
+        const short leaveLocation = 46;
         static void Main(string[] args)
         {
-            Console.SetWindowSize(125, 55);
+            bool up = false;
+            short actualRubric = 1;
+
+            Console.SetWindowSize(120, 58);
+            Console.SetWindowPosition(0, 0);
+            string[] titles = new string[6];
+            titles[0] = "                               _____                        _____                    _  	   \n                              /  ___|                      |_   _|                  | |	   \n                              \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __ \n                               `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                              /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |   \n                              \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|   \n                                    | |                                                          \n                                    |_|                                                          \n";
+            titles[1] = "                                                   ___                                         \n                                                  |_  |                                        \n                                                    | | ___  _   _  ___ _ __                   \n                                                    | |/ _ \\| | | |/ _ \\ '__|                  \n                                                /\\__/ / (_) | |_| |  __/ |                     \n                                                \\____/ \\___/ \\__,_|\\___|_|                     \n";
+            titles[2] = "                                              _____       _   _\n                                             |  _  |     | | (_)\n                                             | | | |_ __ | |_ _  ___  _ __  ___\n                                             | | | | '_ \\| __| |/ _ \\| '_ \\/ __|\n                                             \\ \\_/ / |_) | |_| | (_) | | | \\__ \\\n                                              \\___/| .__/ \\__|_|\\___/|_| |_|___/\n                                                   | |\n                                                   |_|";
+            titles[3] = "                                      _   _ _       _     _   _____\n                                     | | | (_)     | |   | | /  ___|\n                                     | |_| |_  __ _| |__ | |_\\ `--.  ___ ___  _ __ ___\n                                     |  _  | |/ _` | '_ \\| __|`--. \\/ __/ _ \\| '__/ _ \\\n                                     | | | | | (_| | | | | |_/\\__/ / (_| (_) | | |  __/\n                                     \\_| |_/_|\\__, |_| |_|\\__\\____/ \\___\\___/|_|  \\___|\n                                               __/ |\n                                              |___/";
+            titles[4] = "                                             ___   ______\n                                            / _ \\  | ___ \\\n                                           / /_\\ \\ | |_/ / __ ___  _ __   ___  ___                 \n                                           |  _  | |  __/ '__/ _ \\| '_ \\ / _ \\/ __|\n                                           | | | | | |  | | | (_) | |_) | (_) \\__ \\\n                                           \\_| |_/ \\_|  |_|  \\___/| .__/ \\___/|___/\n                                                                  | |\n                                                                  |_|";
+            titles[5] = "                                                _____       _ _   _\n                                               |  _  |     (_) | | |\n                                               | | | |_   _ _| |_| |_ ___ _ __\n                                               | | | | | | | | __| __/ _ \\ '__|\n                                               \\ \\/' / |_| | | |_| ||  __/ |\n                                                \\_/\\_\\__,_|_|\\__|\\__\\___|_|";
+            short[] titlesLocation = new short[6];
+            titlesLocation[0] = 2;
+            titlesLocation[1] = 12;
+            titlesLocation[2] = 20;
+            titlesLocation[3] = 29;
+            titlesLocation[4] = 38;
+            titlesLocation[5] = 47;
             Console.SetWindowPosition(0, 0);
             Console.CursorVisible = false;
 
+            DrawMenu(titles);
+            RubricWritter(titles, titlesLocation, actualRubric, up);
 
 
-          //  Console.Write(tab_values[0, 0]);
-            DrawMenu();
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.SetCursorPosition(0, playLocation);
-            Console.Write(playTitle);
+
+            do
+            {
+
+                actualRubric = navigation(titles, titlesLocation, actualRubric, up);
+
+            } while (titles[0] != "");
+
+
+
 
             Console.ReadLine();
         }
 
+        static void DrawMenu(string[] title)
+        {
 
+            Console.SetCursorPosition(0, 12);
+            for (int a = 1; a < title.Length; a++)
+            {
+                Console.Write(title[a] + "\n\n");
+            }
+            TitleWritter(title[0]);
 
-
-        static void DrawMenu()
+        }
+        static void TitleWritter(string title)
         {
             Console.SetCursorPosition(17, 1);
             Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════════════╗");
 
-          //  Console.WriteLine(invaderTitle);
+            Console.WriteLine(title);
 
             Console.SetCursorPosition(17, 10);
             Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════════════╝");
@@ -70,21 +87,82 @@ namespace SpaceInvader
                 Console.Write("║");
                 Console.SetCursorPosition(109, b);
                 Console.Write("║");
+            }
+        }
+
+        static void RubricWritter(string[] rubric, short[] localistaion, short actualRubric, bool up)
+        {
+            if (up == true && actualRubric > 0 && actualRubric < 5)
+            {
+                Console.SetCursorPosition(0, localistaion[actualRubric + 1]);
+                Console.Write(rubric[actualRubric + 1]);
+            }
+            else if (up == false && actualRubric < 6 && actualRubric > 1)
+            {
+                Console.SetCursorPosition(0, localistaion[actualRubric - 1]);
+                Console.Write(rubric[actualRubric - 1]);
 
             }
+            else if (up == true || actualRubric == 5)
+            {
+                Console.SetCursorPosition(0, localistaion[1]);
+                Console.Write(rubric[1]);
 
-            Console.SetCursorPosition(0, 12);
+            }
+            else if (up == false || actualRubric == 1)
+            {
+                Console.SetCursorPosition(0, localistaion[5]);
+                Console.Write(rubric[5]);
+            }
 
-            Console.WriteLine(playTitle + "\n");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(0, localistaion[actualRubric]);
+            Console.Write(rubric[actualRubric]);
+            Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine(settingTitle + "\n");
+        }
+        static short navigation(string[] titles, short[] titlesLocation, short actualRubric, bool up)
+        {
+            ConsoleKeyInfo arrow = Console.ReadKey();
 
-            Console.WriteLine(hightScoreTitle + "\n");
 
-            Console.WriteLine(detailTitle + "\n");
+            switch (arrow.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    actualRubric--;
+                    up = true;
+                    if (actualRubric <= 0)
+                    {
+                        actualRubric = 5;
+                    }
+                    break;
 
-            Console.WriteLine(leaveTitle);
+                case ConsoleKey.DownArrow:
+                    actualRubric++;
+                    up = false;
+                    if (actualRubric >= 6)
+                    {
+                        actualRubric = 1;
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    MenuActions(actualRubric);
+                    break;
+            }
+            RubricWritter(titles, titlesLocation, actualRubric, up);
+
+            return actualRubric;
+        }
+
+        static void MenuActions(short actualRubric)
+        {
+            if (actualRubric == 5)
+            {
+                Environment.Exit(0);
+
+            }
         }
 
     }
+
 }
