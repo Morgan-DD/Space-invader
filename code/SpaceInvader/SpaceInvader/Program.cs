@@ -41,6 +41,13 @@ namespace SpaceInvader
             Console.SetWindowPosition(0, 0);
             Console.CursorVisible = false;
 
+
+
+
+            
+
+
+
             DrawMenu(titles);
             RubricWritter(titles, titlesLocation, actualRubric, up);
 
@@ -49,13 +56,12 @@ namespace SpaceInvader
 
             do
             {
-<<<<<<< HEAD
-                
-                MainNavigation(titles, titlesLocation, actualRubric, up);
-=======
 
-                actualRubric = navigation(titles, titlesLocation, actualRubric, up);
->>>>>>> parent of c6d002d (09.11.2022)
+                
+                actualRubric = MainNavigation(titles, titlesLocation, actualRubric, up);
+
+
+
 
             } while (titles[0] != "");
 
@@ -67,7 +73,7 @@ namespace SpaceInvader
 
         static void DrawMenu(string[] title)
         {
-
+            Console.Clear();
             Console.SetCursorPosition(0, 12);
             for (int a = 1; a < title.Length; a++)
             {
@@ -97,7 +103,8 @@ namespace SpaceInvader
 
         static void RubricWritter(string[] rubric, short[] localistaion, short actualRubric, bool up)
         {
-            if (up == true && actualRubric > 0 && actualRubric < 6)
+
+            if (up == true && actualRubric > 0 && actualRubric < 5)
             {
                 Console.SetCursorPosition(0, localistaion[actualRubric + 1]);
                 Console.Write(rubric[actualRubric + 1]);
@@ -108,13 +115,167 @@ namespace SpaceInvader
                 Console.Write(rubric[actualRubric - 1]);
 
             }
-            else if (up == true || actualRubric == 1)
+            else if (up == false && actualRubric == 1)
+            {
+                Console.SetCursorPosition(0, localistaion[5]);
+                Console.Write(rubric[5]);
+
+            }
+            else if (up == true && actualRubric == 5)
             {
                 Console.SetCursorPosition(0, localistaion[1]);
                 Console.Write(rubric[1]);
 
             }
-            else if (up == false || actualRubric == 5)
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(0, localistaion[actualRubric]);
+            Console.Write(rubric[actualRubric]);
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+        static short MainNavigation(string[] titles, short[] titlesLocation, short actualRubric, bool up)
+        {
+            ConsoleKeyInfo arrow = Console.ReadKey();
+
+            switch (arrow.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    actualRubric--;
+                    up = true;
+                    if (actualRubric <= 0)
+                    {
+                        actualRubric = 5;
+                    }
+                    RubricWritter(titles, titlesLocation, actualRubric, up);
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    actualRubric++;
+                    up = false;
+                    if (actualRubric >= 6)
+                    {
+                        actualRubric = 1;
+                    }
+                    RubricWritter(titles, titlesLocation, actualRubric, up);
+                    break;
+                case ConsoleKey.Enter:
+                    MenuActions(titles, actualRubric);
+                    break;
+            }
+
+            return actualRubric;
+        }
+
+        static void MenuActions(string[] title, short actualRubric)
+        {
+            if (actualRubric == 5)
+            {
+                Environment.Exit(0);
+            }
+
+            switch (actualRubric)
+            {
+                case 5:
+                    Environment.Exit(0);
+
+                    break;
+
+                case 2:
+                    DrawSettingMenu(actualRubric);
+                    break;
+                
+            }
+        }
+
+        public static void DrawSettingMenu(short actualRubric)
+        {
+            Console.Clear();
+            string[] settings = new string[8];
+            settings[0] = "                                                       _____\n                                                      /  ___|\n                                                      \\ `--.  ___  _ __\n                                                       `--. \\/ _ \\| '_ \\\n                                                      /\\__/ / (_) | | | |\n                                                      \\____/ \\___/|_| |_|\n";
+            settings[1] = "                                                         _____       _\n                                                        |  _  |     (_)\n                                                        | | | |_   _ _ \n                                                        | | | | | | | |\n                                                        \\ \\_/ / |_| | |\n                                                         \\___/ \\__,_|_|\n";
+            //settings[2] = "     __\n    / /\n   / /\n  / /\n / /\n/_/\n";
+            settings[2] = "                                                       _   _\n                                                      | \\ | |\n                                                      |  \\| | ___  _ __\n                                                      | . ` |/ _ \\| '_ \\\n                                                      | |\\  | (_) | | | |\n                                                      \\_| \\_/\\___/|_| |_|\n";
+            settings[3] = "                                              ______ _  __ _            _ _\n                                              |  _  (_)/ _(_)          | | |\n                                              | | | |_| |_ _  ___ _   _| | |_ ___\n                                              | | | | |  _| |/ __| | | | | __/ _ \\\n                                              | |/ /| | | | | (__| |_| | | ||  __/\n                                              |___/ |_|_| |_|\\___|\\__,_|_|\\__\\___|\n";
+            settings[4] = "                                               _   _                            _\n                                              | \\ | |                          | |\n                                              |  \\| | ___  _ __ _ __ ___   __ _| |\n                                              | . ` |/ _ \\| '__| '_ ` _ \\ / _` | |\n                                              | |\\  | (_) | |  | | | | | | (_| | |\n                                              \\_| \\_/\\___/|_|  |_| |_| |_|\\__,_|_|\n";
+            settings[5] = "                                                ______ _  __  __ _      _ _\n                                                |  _  (_)/ _|/ _(_)    (_) |\n                                                | | | |_| |_| |_ _  ___ _| | ___\n                                                | | | | |  _|  _| |/ __| | |/ _ \\\n                                                | |/ /| | | | | | | (__| | |  __/\n                                                |___/ |_|_| |_| |_|\\___|_|_|\\___|\n";
+            settings[6] = "                                           ______         _\n                                           | |_/ /_ _  __| | __ ___      ____ _ _ __\n                                           |  __/ _` |/ _` |/ _` \\ \\ /\\ / / _` | '_ \\\n                                           | | | (_| | (_| | (_| |\\ V  V / (_| | | | |\n                                           \\_|  \\__,_|\\__,_|\\__,_| \\_/\\_/ \\__,_|_| |_|\n";
+
+            short dificulte = 1;
+            bool music = true;
+
+            Console.SetCursorPosition(0,15);
+            for(int a = 0;a < settings.Length;a++)
+            {
+                if(a == 0 || a == 3)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine(settings[a]);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                if (a == dificulte + 3)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(settings[a]);
+                }
+            }
+
+
+
+
+
+
+
+
+            /*
+            if (actualRubric == 5)
+                Console.Clear();
+            Console.SetCursorPosition(0, 12);
+            for (int a = 0; a < title.Length; a++)
+            {
+                Environment.Exit(0);
+                if (a != 2 && a != 5 && a != 6)
+                {
+                    if (a == 1 || a == 5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    Console.Write(title[a] + "\n\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+            }*/
+
+        }
+
+
+
+
+
+
+    
+
+    static void SettingRubricWritter(string[] rubric, short[] localistaion, int actualRubric, bool up)
+        {
+            if (up == true && actualRubric > 0 && actualRubric < 5)
+            {
+                Console.SetCursorPosition(0, localistaion[actualRubric + 1]);
+                Console.Write(rubric[actualRubric + 1]);
+            }
+            else if (up == false && actualRubric < 6 && actualRubric > 1)
+            {
+                Console.SetCursorPosition(0, localistaion[actualRubric - 1]);
+                Console.Write(rubric[actualRubric - 1]);
+
+            }
+            else if (up == true || actualRubric == 5)
+            {
+                Console.SetCursorPosition(0, localistaion[1]);
+                Console.Write(rubric[1]);
+
+            }
+            else if (up == false || actualRubric == 1)
             {
                 Console.SetCursorPosition(0, localistaion[5]);
                 Console.Write(rubric[5]);
@@ -126,47 +287,10 @@ namespace SpaceInvader
             Console.ForegroundColor = ConsoleColor.White;
 
         }
-        static short navigation(string[] titles, short[] titlesLocation, short actualRubric, bool up)
-        {
-            ConsoleKeyInfo arrow = Console.ReadKey();
 
 
-            switch (arrow.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    actualRubric--;
-                    up = true;
-                    if (actualRubric <= 0)
-                    {
-                        actualRubric = 5;
-                    }
-                    break;
 
-                case ConsoleKey.DownArrow:
-                    actualRubric++;
-                    up = false;
-                    if (actualRubric >= 6)
-                    {
-                        actualRubric = 1;
-                    }
-                    break;
-                case ConsoleKey.Enter:
-                    MenuActions(actualRubric);
-                    break;
-            }
-            RubricWritter(titles, titlesLocation, actualRubric, up);
 
-            return actualRubric;
-        }
-
-        static void MenuActions(short actualRubric)
-        {
-            if (actualRubric == 5)
-            {
-                Environment.Exit(0);
-
-            }
-        }
 
     }
 
