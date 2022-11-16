@@ -52,7 +52,7 @@ namespace SpaceInvader
             do
             {
                 
-                actualRubric = MainNavigation(titles, titlesLocation, actualRubric, up);
+                MainNavigation(titles, titlesLocation, actualRubric, up);
 
             } while (titles[0] != "");
 
@@ -96,7 +96,7 @@ namespace SpaceInvader
 
         static void MainRubricWritter(string[] rubric, short[] localistaion, int actualRubric, bool up)
         {
-            if (up == true && actualRubric > 0 && actualRubric < 5)
+            if (up == true && actualRubric > 0 && actualRubric < 6)
             {
                 Console.SetCursorPosition(0, localistaion[actualRubric + 1]);
                 Console.Write(rubric[actualRubric + 1]);
@@ -107,13 +107,13 @@ namespace SpaceInvader
                 Console.Write(rubric[actualRubric - 1]);
 
             }
-            else if (up == true || actualRubric == 5)
+            else if (up == true || actualRubric == 1)
             {
                 Console.SetCursorPosition(0, localistaion[1]);
                 Console.Write(rubric[1]);
 
             }
-            else if (up == false || actualRubric == 1)
+            else if (up == false || actualRubric == 5)
             {
                 Console.SetCursorPosition(0, localistaion[5]);
                 Console.Write(rubric[5]);
