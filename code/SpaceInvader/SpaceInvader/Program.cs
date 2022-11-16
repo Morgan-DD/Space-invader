@@ -8,19 +8,15 @@ namespace SpaceInvader
 {
     class Program
     {
-
-
-
-        const short invaderLocation = 2;
-        const short playLocation = 12;
-        const short settingsLocation = 21;
-        const short hightLocation = 28;
-        const short detailLocation = 37;
-        const short leaveLocation = 46;
+        static Game game = new Game();
         static void Main(string[] args)
         {
             bool up = false;
-            short actualRubric = 1;
+            short MainactualRubric = 1;
+            bool SettingactualRubric = false;
+
+
+            short actualMenu = 1;
 
             Console.SetWindowSize(120, 58);
             Console.SetWindowPosition(0, 0);
@@ -44,22 +40,30 @@ namespace SpaceInvader
 
 
 
-            
 
 
 
-            DrawMenu(titles);
-            RubricWritter(titles, titlesLocation, actualRubric, up);
+            MainMenuDrawer(titles);
+            MainMenuWritter(titles, titlesLocation, MainactualRubric, up);
 
 
 
 
             do
             {
+                Console.SetCursorPosition(10, 0);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(actualMenu);
+                Console.ForegroundColor = ConsoleColor.White;
 
-                
-                actualRubric = MainNavigation(titles, titlesLocation, actualRubric, up);
 
+                    MainactualRubric = MainMenuNavigation(titles, titlesLocation, MainactualRubric, up);
+
+
+             
+
+
+               
 
 
 
@@ -68,19 +72,8 @@ namespace SpaceInvader
 
 
 
+
             Console.ReadLine();
-        }
-
-        static void DrawMenu(string[] title)
-        {
-            Console.Clear();
-            Console.SetCursorPosition(0, 12);
-            for (int a = 1; a < title.Length; a++)
-            {
-                Console.Write(title[a] + "\n\n");
-            }
-            TitleWritter(title[0]);
-
         }
         static void TitleWritter(string title)
         {
@@ -101,7 +94,22 @@ namespace SpaceInvader
             }
         }
 
-        static void RubricWritter(string[] rubric, short[] localistaion, short actualRubric, bool up)
+
+
+
+        static void MainMenuDrawer(string[] title)
+        {
+            Console.Clear();
+            Console.SetCursorPosition(0, 12);
+            for (int a = 1; a < title.Length; a++)
+            {
+                Console.Write(title[a] + "\n\n");
+            }
+            TitleWritter(title[0]);
+
+        }
+
+        static void MainMenuWritter(string[] rubric, short[] localistaion, short actualRubric, bool up)
         {
 
             if (up == true && actualRubric > 0 && actualRubric < 5)
@@ -134,7 +142,7 @@ namespace SpaceInvader
             Console.ForegroundColor = ConsoleColor.White;
 
         }
-        static short MainNavigation(string[] titles, short[] titlesLocation, short actualRubric, bool up)
+        static short MainMenuNavigation(string[] titles, short[] titlesLocation, short actualRubric, bool up)
         {
             ConsoleKeyInfo arrow = Console.ReadKey();
 
@@ -147,7 +155,7 @@ namespace SpaceInvader
                     {
                         actualRubric = 5;
                     }
-                    RubricWritter(titles, titlesLocation, actualRubric, up);
+                    MainMenuWritter(titles, titlesLocation, actualRubric, up);
                     break;
 
                 case ConsoleKey.DownArrow:
@@ -157,23 +165,18 @@ namespace SpaceInvader
                     {
                         actualRubric = 1;
                     }
-                    RubricWritter(titles, titlesLocation, actualRubric, up);
+                    MainMenuWritter(titles, titlesLocation, actualRubric, up);
                     break;
                 case ConsoleKey.Enter:
-                    MenuActions(titles, actualRubric);
+                    MainMenuActions(titles, actualRubric, titlesLocation, up);
                     break;
             }
 
             return actualRubric;
         }
 
-        static void MenuActions(string[] title, short actualRubric)
+        static short MainMenuActions(string[] title, short actualRubric, short[] titlesLocation, bool up)
         {
-            if (actualRubric == 5)
-            {
-                Environment.Exit(0);
-            }
-
             switch (actualRubric)
             {
                 case 5:
@@ -182,111 +185,186 @@ namespace SpaceInvader
                     break;
 
                 case 2:
-                    DrawSettingMenu(actualRubric);
+                    SettingMenu(title[2], title, titlesLocation, actualRubric, up);
                     break;
                 
             }
+            return actualRubric;
         }
 
-        public static void DrawSettingMenu(short actualRubric)
+
+
+        //-------------------------------------- settings --------------------------------------//
+
+
+        static void SettingMenu(string title, string[] titles, short[] titlesLocation, short mainactualRubric, bool up)
+        {
+            bool end = true;
+            short actualRubric = 0;
+
+            short dificulty = game.Difficulty;
+            bool music = true;
+
+            SettingMenuDrawer(title, music, dificulty);
+            SettingMenuWritter(actualRubric);
+
+            do
+            {
+                actualRubric = SettingMenuNavigation(actualRubric, titles);
+                if (actualRubric == 2)
+                        end = false;
+
+            }while (end);
+
+            MainMenuDrawer(titles);
+            MainMenuWritter(titles, titlesLocation, mainactualRubric, up);
+
+        }
+
+
+
+
+        static short SettingMenuDrawer(string title, bool music, short dificulty)
         {
             Console.Clear();
             string[] settings = new string[8];
             settings[0] = "                                                       _____\n                                                      /  ___|\n                                                      \\ `--.  ___  _ __\n                                                       `--. \\/ _ \\| '_ \\\n                                                      /\\__/ / (_) | | | |\n                                                      \\____/ \\___/|_| |_|\n";
             settings[1] = "                                                         _____       _\n                                                        |  _  |     (_)\n                                                        | | | |_   _ _ \n                                                        | | | | | | | |\n                                                        \\ \\_/ / |_| | |\n                                                         \\___/ \\__,_|_|\n";
-            //settings[2] = "     __\n    / /\n   / /\n  / /\n / /\n/_/\n";
             settings[2] = "                                                       _   _\n                                                      | \\ | |\n                                                      |  \\| | ___  _ __\n                                                      | . ` |/ _ \\| '_ \\\n                                                      | |\\  | (_) | | | |\n                                                      \\_| \\_/\\___/|_| |_|\n";
             settings[3] = "                                              ______ _  __ _            _ _\n                                              |  _  (_)/ _(_)          | | |\n                                              | | | |_| |_ _  ___ _   _| | |_ ___\n                                              | | | | |  _| |/ __| | | | | __/ _ \\\n                                              | |/ /| | | | | (__| |_| | | ||  __/\n                                              |___/ |_|_| |_|\\___|\\__,_|_|\\__\\___|\n";
             settings[4] = "                                               _   _                            _\n                                              | \\ | |                          | |\n                                              |  \\| | ___  _ __ _ __ ___   __ _| |\n                                              | . ` |/ _ \\| '__| '_ ` _ \\ / _` | |\n                                              | |\\  | (_) | |  | | | | | | (_| | |\n                                              \\_| \\_/\\___/|_|  |_| |_| |_|\\__,_|_|\n";
             settings[5] = "                                                ______ _  __  __ _      _ _\n                                                |  _  (_)/ _|/ _(_)    (_) |\n                                                | | | |_| |_| |_ _  ___ _| | ___\n                                                | | | | |  _|  _| |/ __| | |/ _ \\\n                                                | |/ /| | | | | | | (__| | |  __/\n                                                |___/ |_|_| |_| |_|\\___|_|_|\\___|\n";
             settings[6] = "                                           ______         _\n                                           | |_/ /_ _  __| | __ ___      ____ _ _ __\n                                           |  __/ _` |/ _` |/ _` \\ \\ /\\ / / _` | '_ \\\n                                           | | | (_| | (_| | (_| |\\ V  V / (_| | | | |\n                                           \\_|  \\__,_|\\__,_|\\__,_| \\_/\\_/ \\__,_|_| |_|\n";
 
-            short dificulte = 1;
-            bool music = true;
+            
 
+            const short songHeight = 22;
+            const short dificutyHeight = 36;
+
+            int vb = Convert.ToInt32(music);
+
+            Console.SetCursorPosition(0,5);
+            TitleWritter(title);
             Console.SetCursorPosition(0,15);
+
             for(int a = 0;a < settings.Length;a++)
             {
                 if(a == 0 || a == 3)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine(settings[a]);
-                    Console.ForegroundColor = ConsoleColor.White;
                 }
-
-                if (a == dificulte + 3)
+                
+                if (a == dificulty + 3 || a == Convert.ToInt32(music) + 1)
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    
                     Console.WriteLine(settings[a]);
                 }
+                Console.ForegroundColor = ConsoleColor.White;
+
             }
-
-
-
-
-
-
-
-
-            /*
-            if (actualRubric == 5)
-                Console.Clear();
-            Console.SetCursorPosition(0, 12);
-            for (int a = 0; a < title.Length; a++)
-            {
-                Environment.Exit(0);
-                if (a != 2 && a != 5 && a != 6)
-                {
-                    if (a == 1 || a == 5)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    }
-                    Console.Write(title[a] + "\n\n");
-                    Console.ForegroundColor = ConsoleColor.White;
-
-                }
-            }*/
-
+            return 2;
         }
-
-
-
-
-
-
-    
-
-    static void SettingRubricWritter(string[] rubric, short[] localistaion, int actualRubric, bool up)
+        static void SettingMenuWritter(short actualRubric)
         {
-            if (up == true && actualRubric > 0 && actualRubric < 5)
-            {
-                Console.SetCursorPosition(0, localistaion[actualRubric + 1]);
-                Console.Write(rubric[actualRubric + 1]);
-            }
-            else if (up == false && actualRubric < 6 && actualRubric > 1)
-            {
-                Console.SetCursorPosition(0, localistaion[actualRubric - 1]);
-                Console.Write(rubric[actualRubric - 1]);
+            short dificulty = game.Difficulty;
+            bool music = game.Music;
 
-            }
-            else if (up == true || actualRubric == 5)
-            {
-                Console.SetCursorPosition(0, localistaion[1]);
-                Console.Write(rubric[1]);
+            string[] songs = new string[2];
+            songs[1] = "                                                          _____       _                   \n                                                         |  _  |     (_)     \n                                                         | | | |_   _ _      \n                                                         | | | | | | | |     \n                                                         \\ \\_/ / |_| | |     \n                                                          \\___/ \\__,_|_|     \n";
+            songs[0] = "                                                       _   _                           \n                                                      | \\ | |                           \n                                                      |  \\| | ___  _ __                           \n                                                      | . ` |/ _ \\| '_ \\     \n                                                      | |\\  | (_) | | | |     \n                                                      \\_| \\_/\\___/|_| |_|     \n";
+            const short songLocation = 22;
 
-            }
-            else if (up == false || actualRubric == 1)
-            {
-                Console.SetCursorPosition(0, localistaion[5]);
-                Console.Write(rubric[5]);
-            }
+            string[] dificultyTitle = new string[3];
+            dificultyTitle[0] = "                                               _   _                            _                              \n                                              | \\ | |                          | |                              \n                                              |  \\| | ___  _ __ _ __ ___   __ _| |                              \n                                              | . ` |/ _ \\| '__| '_ ` _ \\ / _` | |                              \n                                              | |\\  | (_) | |  | | | | | | (_| | |                              \n                                              \\_| \\_/\\___/|_|  |_| |_| |_|\\__,_|_|                              \n";
+            dificultyTitle[1] = "                                                ______ _  __  __ _      _ _                              \n                                                |  _  (_)/ _|/ _(_)    (_) |                              \n                                                | | | |_| |_| |_ _  ___ _| | ___                              \n                                                | | | | |  _|  _| |/ __| | |/ _ \\                              \n                                                | |/ /| | | | | | | (__| | |  __/                              \n                                                |___/ |_|_| |_| |_|\\___|_|_|\\___|                              \n";
+            dificultyTitle[2] = "                                            _____          _                                                         \n                                           |  __ \\        | |                    \n                                           | |__) |_ _  __| | __ ___      ____ _ _ __\n                                           |  ___/ _` |/ _` |/ _` \\ \\ /\\ / / _` | '_ \\\n                                           | |  | (_| | (_| | (_| |\\ V  V / (_| | | | |\n                                           |_|   \\__,_|\\__,_|\\__,_| \\_/\\_/ \\__,_|_| |_|\n";
+            const short dificultyLocation = 36;
+
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition(0, localistaion[actualRubric]);
-            Console.Write(rubric[actualRubric]);
+            if (actualRubric == 0)
+            {
+                Console.SetCursorPosition(0, songLocation);
+                Console.WriteLine(songs[Convert.ToInt32(music)]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetCursorPosition(0, dificultyLocation);
+                Console.WriteLine(dificultyTitle[dificulty]);
+            }
+            else if (actualRubric == 1)
+            {
+                Console.SetCursorPosition(0, dificultyLocation);
+                Console.WriteLine(dificultyTitle[dificulty]);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetCursorPosition(0, songLocation);
+                Console.WriteLine(songs[Convert.ToInt32(music)]);
+            }
             Console.ForegroundColor = ConsoleColor.White;
 
         }
+
+        static short SettingMenuNavigation(short actualRubric, string[] titres)
+        {
+            ConsoleKeyInfo arrow = Console.ReadKey();
+
+            switch (arrow.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    if(actualRubric == 0)
+                        actualRubric = 1;
+                    else if (actualRubric == 1)
+                        actualRubric = 0;
+                    SettingMenuWritter(actualRubric);
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    if (actualRubric == 0)
+                        actualRubric = 1;
+                    else if (actualRubric == 1)
+                        actualRubric = 0;
+                    SettingMenuWritter(actualRubric);
+                    break;
+                case ConsoleKey.Enter:
+                    SettingMenuActions(actualRubric);
+                    break;
+                case ConsoleKey.Escape:
+                    actualRubric = 2;
+                    break;
+            }
+
+            return actualRubric;
+        }
+        static void SettingMenuActions(short actualRubric)
+        {
+            
+
+            switch (actualRubric)
+            {
+                case 0:
+                    game.Music = !game.Music;
+                    SettingMenuWritter(actualRubric);
+                    break;
+
+                case 1:
+                    if (game.Difficulty == 2)
+                    {
+                        game.Difficulty = 0;
+                    }
+                    else
+                        game.Difficulty++;
+                        SettingMenuWritter(actualRubric);
+                    break;
+
+            }
+
+
+
+        }
+
+
+
+
+
 
 
 
