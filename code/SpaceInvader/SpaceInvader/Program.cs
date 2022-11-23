@@ -13,10 +13,8 @@ namespace SpaceInvader
         {
             bool up = false;
             short MainactualRubric = 1;
-            bool SettingactualRubric = false;
 
 
-            short actualMenu = 1;
 
             Console.SetWindowSize(120, 58);
             Console.SetWindowPosition(0, 0);
@@ -51,21 +49,7 @@ namespace SpaceInvader
 
             do
             {
-                Console.SetCursorPosition(10, 0);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(actualMenu);
-                Console.ForegroundColor = ConsoleColor.White;
-
-
-                    MainactualRubric = MainMenuNavigation(titles, titlesLocation, MainactualRubric, up);
-
-
-             
-
-
-               
-
-
+                MainactualRubric = MainMenuNavigation(titles, titlesLocation, MainactualRubric, up);
 
             } while (titles[0] != "");
 
@@ -93,9 +77,6 @@ namespace SpaceInvader
                 Console.Write("║");
             }
         }
-
-
-
 
         static void MainMenuDrawer(string[] title)
         {
@@ -179,15 +160,17 @@ namespace SpaceInvader
         {
             switch (actualRubric)
             {
-                case 5:
-                    Environment.Exit(0);
-
+                case 1:
+                    game.gameStart();
                     break;
 
                 case 2:
                     SettingMenu(title[2], title, titlesLocation, actualRubric, up);
                     break;
-                
+
+                case 5:
+                    Environment.Exit(0);
+                    break;
             }
             return actualRubric;
         }
@@ -212,18 +195,14 @@ namespace SpaceInvader
             {
                 actualRubric = SettingMenuNavigation(actualRubric, titles);
                 if (actualRubric == 2)
-                        end = false;
+                    end = false;
 
-            }while (end);
+            } while (end);
 
             MainMenuDrawer(titles);
             MainMenuWritter(titles, titlesLocation, mainactualRubric, up);
 
         }
-
-
-
-
         static short SettingMenuDrawer(string title, bool music, short dificulty)
         {
             Console.Clear();
@@ -236,33 +215,30 @@ namespace SpaceInvader
             settings[5] = "                                                ______ _  __  __ _      _ _\n                                                |  _  (_)/ _|/ _(_)    (_) |\n                                                | | | |_| |_| |_ _  ___ _| | ___\n                                                | | | | |  _|  _| |/ __| | |/ _ \\\n                                                | |/ /| | | | | | | (__| | |  __/\n                                                |___/ |_|_| |_| |_|\\___|_|_|\\___|\n";
             settings[6] = "                                           ______         _\n                                           | |_/ /_ _  __| | __ ___      ____ _ _ __\n                                           |  __/ _` |/ _` |/ _` \\ \\ /\\ / / _` | '_ \\\n                                           | | | (_| | (_| | (_| |\\ V  V / (_| | | | |\n                                           \\_|  \\__,_|\\__,_|\\__,_| \\_/\\_/ \\__,_|_| |_|\n";
 
-            
-
-            const short songHeight = 22;
-            const short dificutyHeight = 36;
-
             int vb = Convert.ToInt32(music);
 
-            Console.SetCursorPosition(0,5);
+            Console.SetCursorPosition(0, 5);
             TitleWritter(title);
-            Console.SetCursorPosition(0,15);
+            Console.SetCursorPosition(0, 15);
 
-            for(int a = 0;a < settings.Length;a++)
+            for (int a = 0; a < settings.Length; a++)
             {
-                if(a == 0 || a == 3)
+                if (a == 0 || a == 3)
                 {
                     Console.WriteLine(settings[a]);
                 }
-                
+
                 if (a == dificulty + 3 || a == Convert.ToInt32(music) + 1)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    
+
                     Console.WriteLine(settings[a]);
                 }
                 Console.ForegroundColor = ConsoleColor.White;
 
             }
+            Console.SetCursorPosition(55, 50);
+            Console.WriteLine("Press [Esc] to exit");
             return 2;
         }
         static void SettingMenuWritter(short actualRubric)
@@ -302,7 +278,6 @@ namespace SpaceInvader
             Console.ForegroundColor = ConsoleColor.White;
 
         }
-
         static short SettingMenuNavigation(short actualRubric, string[] titres)
         {
             ConsoleKeyInfo arrow = Console.ReadKey();
@@ -310,7 +285,7 @@ namespace SpaceInvader
             switch (arrow.Key)
             {
                 case ConsoleKey.UpArrow:
-                    if(actualRubric == 0)
+                    if (actualRubric == 0)
                         actualRubric = 1;
                     else if (actualRubric == 1)
                         actualRubric = 0;
@@ -336,7 +311,7 @@ namespace SpaceInvader
         }
         static void SettingMenuActions(short actualRubric)
         {
-            
+
 
             switch (actualRubric)
             {
@@ -352,7 +327,7 @@ namespace SpaceInvader
                     }
                     else
                         game.Difficulty++;
-                        SettingMenuWritter(actualRubric);
+                    SettingMenuWritter(actualRubric);
                     break;
 
             }
@@ -371,5 +346,4 @@ namespace SpaceInvader
 
 
     }
-
 }
