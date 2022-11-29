@@ -16,47 +16,47 @@ namespace SpaceInvader
 
 
 
-        private string[] _anlienSkinGigA = new string[5];
-        private string[] _anlienSkinGigB = new string[5];
+        private string[] _alienSkinGigA = new string[5];
+        private string[] _alienSkinGigB = new string[5];
 
-        private string[] _anlienSkinSmallA = new string[5];
-        private string[] _anlienSkinSmallB = new string[5];
+        private string[] _alienSkinSmallA = new string[5];
+        private string[] _alienSkinSmallB = new string[5];
 
         private string[] spaceShip = new string[4];
 
-        private int _spaceShipX = 28;
-        private int _spaceShipY = 1;
+        private int _alienSpaceShipX = 28;
+        private int _alienSpaceShipY = 1;
 
-        private int _nbSpaceShip = 2;
+        private int _nbAlienSpaceShip = 2;
         public Alien(bool type, int x, int y)
         {
             _type = type;
             X = x;
             _y = y;
 
-            _anlienSkinGigA[0] = "     ▀▄   ▄▀     ";
-            _anlienSkinGigA[1] = "    ▄█▀███▀█▄    ";
-            _anlienSkinGigA[2] = "   █▀███████▀█   ";
-            _anlienSkinGigA[3] = "   █ █▀▀▀▀▀█ █   ";
-            _anlienSkinGigA[4] = "      ▀▀ ▀▀      ";
+            _alienSkinGigA[0] = "     ▀▄   ▄▀     ";
+            _alienSkinGigA[1] = "    ▄█▀███▀█▄    ";
+            _alienSkinGigA[2] = "   █▀███████▀█   ";
+            _alienSkinGigA[3] = "   █ █▀▀▀▀▀█ █   ";
+            _alienSkinGigA[4] = "      ▀▀ ▀▀      ";
 
-            _anlienSkinGigB[0] = "   ▄ ▀▄   ▄▀ ▄   ";
-            _anlienSkinGigB[1] = "   █▄███████▄█   ";
-            _anlienSkinGigB[2] = "   ███▄███▄███   ";
-            _anlienSkinGigB[3] = "   ▀█████████▀   ";
-            _anlienSkinGigB[4] = "    ▄▀     ▀▄    ";
+            _alienSkinGigB[0] = "   ▄ ▀▄   ▄▀ ▄   ";
+            _alienSkinGigB[1] = "   █▄███████▄█   ";
+            _alienSkinGigB[2] = "   ███▄███▄███   ";
+            _alienSkinGigB[3] = "   ▀█████████▀   ";
+            _alienSkinGigB[4] = "    ▄▀     ▀▄    ";
 
-            _anlienSkinSmallA[0] = "      ▄██▄     ";
-            _anlienSkinSmallA[1] = "    ▄██████▄   ";
-            _anlienSkinSmallA[2] = "   ███▄██▄███  ";
-            _anlienSkinSmallA[3] = "     ▄▀▄▄▀▄    ";
-            _anlienSkinSmallA[4] = "    ▀ ▀  ▀ ▀   ";
+            _alienSkinSmallA[0] = "      ▄██▄     ";
+            _alienSkinSmallA[1] = "    ▄██████▄   ";
+            _alienSkinSmallA[2] = "   ███▄██▄███  ";
+            _alienSkinSmallA[3] = "     ▄▀▄▄▀▄    ";
+            _alienSkinSmallA[4] = "    ▀ ▀  ▀ ▀   ";
 
-            _anlienSkinSmallB[0] = "      ▄██▄     ";
-            _anlienSkinSmallB[1] = "    ▄██████▄   ";
-            _anlienSkinSmallB[2] = "   ███▄██▄███  ";
-            _anlienSkinSmallB[3] = "    ▄▀▄▀▀▄▀▄   ";
-            _anlienSkinSmallB[4] = "   ▀        ▀  ";
+            _alienSkinSmallB[0] = "      ▄██▄     ";
+            _alienSkinSmallB[1] = "    ▄██████▄   ";
+            _alienSkinSmallB[2] = "   ███▄██▄███  ";
+            _alienSkinSmallB[3] = "    ▄▀▄▀▀▄▀▄   ";
+            _alienSkinSmallB[4] = "   ▀        ▀  ";
 
 
             spaceShip[0] = "    ▄▄████▄▄    ";
@@ -69,68 +69,69 @@ namespace SpaceInvader
         public int Y { get => _y; set => _y = value; }
         public int X { get => _x; set => _x = value; }
 
-        public void writeAliens(bool position)
+        public bool writeAliens(bool position)
         {
             if (_type)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-
                 if (position)
                 {
-                    for (int a = 0; a < _anlienSkinGigA.Length; a++)
+                    for (int a = 0; a < _alienSkinGigA.Length; a++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.SetCursorPosition(X, _y + a);
-                        Console.WriteLine(_anlienSkinGigA[a]);
+                        Console.WriteLine(_alienSkinGigA[a]);
                     }
                 }
                 else
                 {
-                    for (int a = 0; a < _anlienSkinGigB.Length; a++)
+                    for (int a = 0; a < _alienSkinGigB.Length; a++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.SetCursorPosition(X, _y + a);
-                        Console.WriteLine(_anlienSkinGigB[a]);
+                        Console.WriteLine(_alienSkinGigB[a]);
                     }
                 }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-
                 if (position)
                 {
-                    for (int a = 0; a < _anlienSkinSmallA.Length; a++)
+                    for (int a = 0; a < _alienSkinSmallA.Length; a++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.SetCursorPosition(X, _y + a);
-                        Console.WriteLine(_anlienSkinSmallA[a]);
+                        Console.WriteLine(_alienSkinSmallA[a]);
                     }
                 }
                 else
                 {
-                    for (int a = 0; a < _anlienSkinSmallB.Length; a++)
+                    for (int a = 0; a < _alienSkinSmallB.Length; a++)
                     {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.SetCursorPosition(X, _y + a);
-                        Console.WriteLine(_anlienSkinSmallB[a]);
+                        Console.WriteLine(_alienSkinSmallB[a]);
                     }
                 }
             }
             Console.ForegroundColor = ConsoleColor.White;
+            return true;
         }
         public void writeAlienShip()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
 
-            Console.SetCursorPosition(_spaceShipX, _spaceShipY);
-            for (int a = 0; a < _nbSpaceShip; a++)
+            Console.SetCursorPosition(_alienSpaceShipX, _alienSpaceShipY);
+            for (int a = 0; a < _nbAlienSpaceShip; a++)
             {
                 for (int b = 0; b < spaceShip.Length; b++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     if (a == 1)
                     {
-                        Console.SetCursorPosition(_spaceShipX, _spaceShipY + b);
+                        Console.SetCursorPosition(_alienSpaceShipX, _alienSpaceShipY + b);
                     }
                     else
                     {
-                        Console.SetCursorPosition((_spaceShipX * 2) + spaceShip[0].Length, _spaceShipY + b);
+                        Console.SetCursorPosition((_alienSpaceShipX * 2) + spaceShip[0].Length, _alienSpaceShipY + b);
                     }
                     Console.WriteLine(spaceShip[b]);
                 }

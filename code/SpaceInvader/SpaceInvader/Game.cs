@@ -14,11 +14,13 @@ namespace SpaceInvader
 
         bool _positionAlien = true;
         bool _error = false;
-        System.Timers.Timer aTimer = new System.Timers.Timer();
+        bool _moove = true;
+        System.Timers.Timer alienTimer = new System.Timers.Timer();
 
         private bool _alienDirection = true;
         List<Alien> _alienList = new List<Alien>();
 
+        SpaceShip Ship = new SpaceShip();
 
         public Game()
         {
@@ -35,7 +37,7 @@ namespace SpaceInvader
             }
 
 
-                for (int a = 0; a < 3; a++)
+            for (int a = 0; a < 3; a++)
             {
                 for (int b = 0; b < 5; b++)
                 {
@@ -52,39 +54,57 @@ namespace SpaceInvader
 
             if (_difficulty == 0)
             {
-                aTimer.Interval = 500;
+                alienTimer.Interval = 500;
 
             }
             else if (_difficulty == 1)
             {
-                aTimer.Interval = 250;
+                alienTimer.Interval = 250;
             }
             else
             {
-                aTimer.Interval = 100;
+                alienTimer.Interval = 100;
             }
 
 
 
 
             //-----------------------------------------------------------------------------//
-            aTimer.Interval = 50;
+            //alienTimer.Interval = 50;
             //-----------------------------------------------------------------------------//
 
-
-
-
-
-            aTimer.Elapsed += aTimer_Tick;
+            alienTimer.Elapsed += alienTimer_Tick;
             _alienList[0].writeAlienShip();
             // Console.ReadKey();
-            aTimer.Start();
+            alienTimer.Start();
+            Ship.WriteShip();
 
 
 
+            do
+            {
+                ConsoleKeyInfo arrow = Console.ReadKey();
+                if (_moove)
+                {
+                    switch (arrow.Key)
+                    {
+                        case ConsoleKey.RightArrow:
+                            if (Ship.X < 120 -  1 - Ship.GetShipLength())
+                                Ship.X += 1;
+                            break;
 
+                        case ConsoleKey.LeftArrow:
+                            if (Ship.X > 1)
+                                Ship.X -= 1;
+                            break;
+                        case ConsoleKey.Spacebar:
+                            Ship.Shoot();
+                            break;
+                    }
+                    Ship.WriteShip();
+                }
 
-
+            } while (true);
 
         }
 
@@ -102,7 +122,7 @@ namespace SpaceInvader
         }
 
 
-        private void aTimer_Tick(object sender, System.EventArgs e)
+        private void alienTimer_Tick(object sender, System.EventArgs e)
         {
             _error = false;
             for (int c = 0; c < _alienList.Count; c++)
@@ -142,8 +162,8 @@ namespace SpaceInvader
                         _error = false;
                     }
                 }
-
-                _alienList[c].writeAliens(_positionAlien);
+                _moove = false;
+                _moove = _alienList[c].writeAliens(_positionAlien);
             }
             if (_error)
             {
@@ -152,7 +172,7 @@ namespace SpaceInvader
             }
             else
             {
-                for(int d = 0; d < _alienList.Count; d++)
+                for (int d = 0; d < _alienList.Count; d++)
                 {
                     if (_alienDirection)
                     {
@@ -165,7 +185,7 @@ namespace SpaceInvader
                 }
             }
 
-                
+
 
         }
 
@@ -195,8 +215,9 @@ namespace SpaceInvader
 
         public void gameEnd(int end)
         {
-            aTimer.Stop();
-            switch (end){
+            alienTimer.Stop();
+            switch (end)
+            {
                 case 0:
                     gameLoose();
                     break;
@@ -205,14 +226,14 @@ namespace SpaceInvader
                 case 2:
                     break;
             }
-            
+
 
         }
 
         public void gameLoose()
         {
             Console.Clear();
-            Console.SetCursorPosition(0,20);
+            Console.SetCursorPosition(0, 20);
             Console.WriteLine("Perdu");
         }
     }
