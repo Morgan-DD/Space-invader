@@ -40,23 +40,23 @@ namespace SpaceInvader
             _anlienSkinGigA[3] = "   █ █▀▀▀▀▀█ █   ";
             _anlienSkinGigA[4] = "      ▀▀ ▀▀      ";
 
-            _anlienSkinGigB[0] = "   ▄ ▀▄   ▄▀ ▄ ";
-            _anlienSkinGigB[1] = "   █▄███████▄█ ";
-            _anlienSkinGigB[2] = "   ███▄███▄███ ";
-            _anlienSkinGigB[3] = "   ▀█████████▀ ";
-            _anlienSkinGigB[4] = "    ▄▀     ▀▄  ";
+            _anlienSkinGigB[0] = "   ▄ ▀▄   ▄▀ ▄   ";
+            _anlienSkinGigB[1] = "   █▄███████▄█   ";
+            _anlienSkinGigB[2] = "   ███▄███▄███   ";
+            _anlienSkinGigB[3] = "   ▀█████████▀   ";
+            _anlienSkinGigB[4] = "    ▄▀     ▀▄    ";
 
-            _anlienSkinSmallA[0] = "      ▄██▄       ";
-            _anlienSkinSmallA[1] = "    ▄██████▄     ";
-            _anlienSkinSmallA[2] = "   ███▄██▄███    ";
-            _anlienSkinSmallA[3] = "     ▄▀▄▄▀▄      ";
-            _anlienSkinSmallA[4] = "    ▀ ▀  ▀ ▀     ";
+            _anlienSkinSmallA[0] = "      ▄██▄     ";
+            _anlienSkinSmallA[1] = "    ▄██████▄   ";
+            _anlienSkinSmallA[2] = "   ███▄██▄███  ";
+            _anlienSkinSmallA[3] = "     ▄▀▄▄▀▄    ";
+            _anlienSkinSmallA[4] = "    ▀ ▀  ▀ ▀   ";
 
-            _anlienSkinSmallB[0] = "      ▄██▄       ";
-            _anlienSkinSmallB[1] = "    ▄██████▄     ";
-            _anlienSkinSmallB[2] = "   ███▄██▄███    ";
-            _anlienSkinSmallB[3] = "    ▄▀▄▀▀▄▀▄     ";
-            _anlienSkinSmallB[4] = "   ▀        ▀    ";
+            _anlienSkinSmallB[0] = "      ▄██▄     ";
+            _anlienSkinSmallB[1] = "    ▄██████▄   ";
+            _anlienSkinSmallB[2] = "   ███▄██▄███  ";
+            _anlienSkinSmallB[3] = "    ▄▀▄▀▀▄▀▄   ";
+            _anlienSkinSmallB[4] = "   ▀        ▀  ";
 
 
             spaceShip[0] = "    ▄▄████▄▄    ";
