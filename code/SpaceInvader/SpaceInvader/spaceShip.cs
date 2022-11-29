@@ -34,7 +34,7 @@ namespace SpaceInvader
             _spaceShip[4] = "  █████████████  ";
 
             BulletCooldownTimer.Elapsed += BulletCooldownTimer_Tick;
-            BulletCooldownTimer.Interval = 1000;
+            BulletCooldownTimer.Interval = 1500;
 
         }
 
