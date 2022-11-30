@@ -9,8 +9,8 @@ namespace SpaceInvader
 {
     public class Game
     {
-        short _difficulty = 0;
-        bool _music = true;
+        short _difficulty;
+        bool _music;
 
         bool _positionAlien = true;
         bool _error = false;
@@ -22,8 +22,15 @@ namespace SpaceInvader
 
         SpaceShip Ship = new SpaceShip();
 
+
+
+         Menu menu = new Menu(3);
+
+
         public Game()
         {
+            _difficulty = menu.Difficulty;
+            _music = menu.Music;
 
         }
 
@@ -31,6 +38,7 @@ namespace SpaceInvader
         {
             Console.Clear();
             Console.SetCursorPosition(0, 50);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             for (int d = 0; d < 120; d++)
             {
                 Console.Write("-");
@@ -41,14 +49,7 @@ namespace SpaceInvader
             {
                 for (int b = 0; b < 5; b++)
                 {
-                    if (a % 2 == 0)
-                    {
-                        _alienList.Add(new Alien(true, b * 15 + 20, a * 7 + 8));
-                    }
-                    else
-                    {
-                        _alienList.Add(new Alien(false, b * 15 + 20, a * 7 + 8));
-                    }
+                    _alienList.Add(new Alien(a % 2 == 0, b * 15 + 20, a * 7 + 8));
                 }
             }
 
@@ -70,12 +71,11 @@ namespace SpaceInvader
 
 
             //-----------------------------------------------------------------------------//
-            //alienTimer.Interval = 50;
+            alienTimer.Interval = 50;
             //-----------------------------------------------------------------------------//
 
             alienTimer.Elapsed += alienTimer_Tick;
             _alienList[0].writeAlienShip();
-            // Console.ReadKey();
             alienTimer.Start();
             Ship.WriteShip();
 
@@ -100,6 +100,9 @@ namespace SpaceInvader
                         case ConsoleKey.Spacebar:
                             Ship.Shoot();
                             break;
+                        case ConsoleKey.Escape:
+                            gamePause();
+                            break;
                     }
                     Ship.WriteShip();
                 }
@@ -108,17 +111,12 @@ namespace SpaceInvader
 
         }
 
-
-        public short Difficulty
+        public void gamePause()
         {
-            get { return _difficulty; }
-            set { _difficulty = value; }
-        }
+            alienTimer.Stop();
+            Ship.shipPause();
 
-        public bool Music
-        {
-            get { return _music; }
-            set { _music = value; }
+            menu.menuAffiche();
         }
 
 

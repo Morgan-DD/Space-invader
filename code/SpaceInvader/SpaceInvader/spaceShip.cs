@@ -86,11 +86,16 @@ namespace SpaceInvader
             }
         }
 
+        public void shipPause()
+        {
+            BulletCooldownTimer.Stop();
+        }
+
         public void WriteShip()
         {
             for (int a = 0; a < _spaceShip.Length; a++)
             {
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.SetCursorPosition(_x, 52 + a);
                 Console.Write(_spaceShip[a]);
             }
