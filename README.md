@@ -3,7 +3,7 @@ space invaders dans le projet P-Dev 2em
 Auteur: Dussault Morgan
 
 Prochaine echeance :
-	Beta 1 
+	Beta 2 
 	Dimmanche 4 Decembre (30 novembre)
 
 livrables:
