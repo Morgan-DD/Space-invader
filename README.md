@@ -4,10 +4,12 @@ Auteur: Dussault Morgan
 
 Prochaine echeance :
 	Beta 1 
-	Dimmanche 13 novembre (9 novembre)
+	Dimmanche 4 Decembre (30 novembre)
 
 livrables:
-	contient le fichier du livrable suivant (si commencé ou fini)
+	contient le fichier du livrable suivant (si commencé ou fini):
+		- documentationDeProjet.pdf
+		- AutoEval_Dussault_Morgan.pdf
 	pour les livrables et leur dates se referer au fichier *\GitHub\Space-invader\info-donnée\D-032-XCL-P_Dev-CahierDesCharges2223.pdf
 
 	
@@ -18,7 +20,7 @@ info-donnée:
 
 
 encours:
-	contient des pdf des livrables en cours (uml)
+	contient des pdf des diagrames uml et le screen des tests unitaires
 
 
 
@@ -33,3 +35,7 @@ code:
 
 ecriture.txt
 	contient les differants grands texts a afficher (dans le menu pour l'insatant)
+
+
+aliens.txt
+	Contien les differants aliens et vaisseau

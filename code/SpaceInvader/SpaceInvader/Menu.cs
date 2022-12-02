@@ -45,8 +45,7 @@ namespace SpaceInvader
         {
             int space = 6;
             _type = type;
-            if (type == 3)
-            {
+            
                 _titlepause[0] = " _____";
                 _titlepause[1] = "|  __ \\";
                 _titlepause[2] = "| |__) |_ _ _   _ ___  ___";
@@ -81,9 +80,7 @@ namespace SpaceInvader
                 _titleContinueLocation[0] = 37;
                 _titleContinueLocation[1] = _titleLeaveLocation[1] + Convert.ToString(_titleLeaveLocation[1]).Count() + space;
 
-            }
-            else
-            {
+            
                 titles[0] = "                               _____                        _____                    _  	   \n                              /  ___|                      |_   _|                  | |	   \n                              \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __ \n                               `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                              /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |   \n                              \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|   \n                                    | |                                                          \n                                    |_|                                                          \n";
                 titles[1] = "                                                   ___                                         \n                                                  |_  |                                        \n                                                    | | ___  _   _  ___ _ __                   \n                                                    | |/ _ \\| | | |/ _ \\ '__|                  \n                                                /\\__/ / (_) | |_| |  __/ |                     \n                                                \\____/ \\___/ \\__,_|\\___|_|                     \n";
                 titles[2] = "                                              _____       _   _\n                                             |  _  |     | | (_)\n                                             | | | |_ __ | |_ _  ___  _ __  ___\n                                             | | | | '_ \\| __| |/ _ \\| '_ \\/ __|\n                                             \\ \\_/ / |_) | |_| | (_) | | | \\__ \\\n                                              \\___/| .__/ \\__|_|\\___/|_| |_|___/\n                                                   | |\n                                                   |_|";
@@ -98,7 +95,7 @@ namespace SpaceInvader
                 titlesLocation[4] = 38;
                 titlesLocation[5] = 47;
 
-            }
+            
         }
 
         //MainMenuDrawer(titles, titlesLocation, MainactualRubric, up);
