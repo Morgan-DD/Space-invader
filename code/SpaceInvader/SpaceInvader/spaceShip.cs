@@ -19,7 +19,8 @@ namespace SpaceInvader
         bool direction;
         List<Bullet> _bullets = new List<Bullet>();
 
-        System.Timers.Timer BulletCooldownTimer = new System.Timers.Timer();
+        Game _game;
+
         bool _canShoot = true;
 
         private string[] _spaceShip = new string[5];
@@ -27,14 +28,12 @@ namespace SpaceInvader
 
         public SpaceShip()
         {
+
             _spaceShip[0] = "        ▄        ";
             _spaceShip[1] = "       ███       ";
             _spaceShip[2] = "  ▄███████████▄  ";
             _spaceShip[3] = "  █████████████  ";
             _spaceShip[4] = "  █████████████  ";
-
-            BulletCooldownTimer.Elapsed += BulletCooldownTimer_Tick;
-            BulletCooldownTimer.Interval = 1500;
 
         }
 
@@ -69,6 +68,8 @@ namespace SpaceInvader
             set { _x = value; }
         }
 
+        public Game Game { get => _game; set => _game = value; }
+
         public int GetShipLength()
         {
             return _spaceShip[0].Length;
@@ -86,11 +87,6 @@ namespace SpaceInvader
             }
         }
 
-        public void shipPause()
-        {
-            BulletCooldownTimer.Stop();
-        }
-
         public void WriteShip()
         {
             for (int a = 0; a < _spaceShip.Length; a++)
@@ -101,28 +97,11 @@ namespace SpaceInvader
             }
         }
 
-        private void BulletCooldownTimer_Tick(object sender, System.EventArgs e)
-        {
-            if (!_canShoot)
-                _canShoot = true;
-            BulletCooldownTimer.Stop();
-        }
-
 
 
         public void Shoot()
         {
-            if (_canShoot)
-            {
-                _bullets.Add(new Bullet(_x + 8, 51, true));
-
-                for (int a = 0; a < _bullets.Count; a++)
-                {
-                    _bullets.Last().Mouve();
-                }
-                _canShoot=false;
-                BulletCooldownTimer.Start();
-            }
+            _game.newShoot(_x, true);
         }
     }
 }

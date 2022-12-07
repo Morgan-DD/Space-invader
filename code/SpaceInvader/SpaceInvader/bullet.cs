@@ -14,9 +14,6 @@ namespace SpaceInvader
         bool _direction;
         int speed;
 
-        System.Timers.Timer BulletTimer = new System.Timers.Timer();
-
-
         public Bullet(int x, int y, bool direction){
 
             _x = x;
@@ -25,23 +22,13 @@ namespace SpaceInvader
 
         }
 
-        public void Mouve()
+        public int Y { get => _y; set => _y = value; }
+        public int X { get => _x; set => _x = value; }
+
+        public bool Mouve()
         {
-            BulletTimer.Elapsed += BulletTimer_Tick;
-            BulletTimer.Interval = 100;
-            BulletTimer.Start();
-        }
-
-
-
-        private void BulletTimer_Tick(object sender, System.EventArgs e)
-        {
-            if(_y > 1)
-            {
-                Console.SetCursorPosition(_x, _y);
-                Console.WriteLine("     ");
-            }
-
+            Console.SetCursorPosition(_x, _y);
+            Console.WriteLine(" ");
             if (_direction)
             {
                 _y -= 1;
@@ -50,22 +37,13 @@ namespace SpaceInvader
             {
                 _y += 1;
             }
-
-            if(_y > 1)
+            if (_y < 3)
             {
-
-                Console.SetCursorPosition(_x, _y);
-                Console.WriteLine("  |  ");
+                return true;
             }
-            else
-            {
-                BulletTimer.Stop();
-            }
-
+            Console.SetCursorPosition(_x, _y);
+            Console.WriteLine("|");
+            return false;
         }
-
-
-
-
     }
 }

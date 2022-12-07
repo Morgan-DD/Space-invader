@@ -8,32 +8,24 @@ namespace SpaceInvader
 {
     internal class Menu
     {
-        int _type;
 
 
-        string[] _titlepause = new string[6];
-        int[] _titlepauseLocation = new int[2];
 
-        string[] _titleLeave = new string[6];
-        int[] _titleLeaveLocation = new int[2];
 
-        string[] _titleContinue = new string[8];
-        int[] _titleContinueLocation = new int[2];
-
-        bool _menuLocation = true;
 
         bool up = false;
-        short MainactualRubric = 1;
+        short Main_actualRubric = 1;
 
 
+        Game game = new Game(new SpaceShip());
 
-        Game game = new Game();
+
 
         public string[] titles = new string[6];
  
         short[] titlesLocation = new short[6];
 
-        short actualRubric = 1;
+        short Setting_actualRubric = 0;
 
         short _difficulty = 0;
         bool _music = true;
@@ -43,42 +35,8 @@ namespace SpaceInvader
 
         public Menu(int type)
         {
-            int space = 6;
-            _type = type;
-            
-                _titlepause[0] = " _____";
-                _titlepause[1] = "|  __ \\";
-                _titlepause[2] = "| |__) |_ _ _   _ ___  ___";
-                _titlepause[3] = "|  ___/ _` | | | / __|/ _ \\";
-                _titlepause[4] = "| |  | (_| | |_| \\__ \\  __/";
-                _titlepause[5] = "|_|   \\__,_|\\__,_|___/\\___|";
-
-                _titlepauseLocation[0] = 45;
-                _titlepauseLocation[1] = 10;
-
-
-                _titleLeave[0] = " _____       _ _   _";
-                _titleLeave[1] = "|  _  |     (_) | | |";
-                _titleLeave[2] = "| | | |_   _ _| |_| |_ ___ _ __";
-                _titleLeave[3] = "| | | | | | | | __| __/ _ \\ '__|";
-                _titleLeave[4] = "\\ \\/' / |_| | | |_| ||  __/ |";
-                _titleLeave[5] = " \\_/\\\\_\\__,_|_|\\__|\\__\\___|_|";
-
-                _titleLeaveLocation[0] = 44;
-                _titleLeaveLocation[1] = _titlepauseLocation[1] + Convert.ToString(_titlepauseLocation[1]).Count() + space;
-
-
-                _titleContinue[0] = "______                              _";
-                _titleContinue[1] = "| ___ \\                            | |";
-                _titleContinue[2] = "| |_/ /___ _ __  _ __ ___ _ __   __| |_ __ ___";
-                _titleContinue[3] = "|    // _ \\ '_ \\| '__/ _ \\ '_ \\ / _` | '__/ _ \\";
-                _titleContinue[4] = "| |\\ \\  __/ |_) | | |  __/ | | | (_| | | |  __/";
-                _titleContinue[5] = "\\_| \\_\\___| .__/|_|  \\___|_| |_|\\__,_|_|  \\___|";
-                _titleContinue[6] = "          | |";
-                _titleContinue[7] = "          |_|";
-
-                _titleContinueLocation[0] = 37;
-                _titleContinueLocation[1] = _titleLeaveLocation[1] + Convert.ToString(_titleLeaveLocation[1]).Count() + space;
+            game.giveGameToShip(game);
+                
 
             
                 titles[0] = "                               _____                        _____                    _  	   \n                              /  ___|                      |_   _|                  | |	   \n                              \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __ \n                               `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                              /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |   \n                              \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|   \n                                    | |                                                          \n                                    |_|                                                          \n";
@@ -95,156 +53,26 @@ namespace SpaceInvader
                 titlesLocation[4] = 38;
                 titlesLocation[5] = 47;
 
-            
-        }
-
-        //MainMenuDrawer(titles, titlesLocation, MainactualRubric, up);
-
-
-
-
-        public void menuAffiche()
-        {
-            int diffrence = 15;
-            int yLimit = _titleContinueLocation[1] + 5;
-            int xLimit = 27;
-            for (int b = 0; b < yLimit; b++)
+            /*
+            if (_difficulty == 0)
             {
-                Console.SetCursorPosition(_titlepauseLocation[0] - diffrence, _titlepauseLocation[1] - (diffrence / 4) + b);
-                if (b == 0)
-                {
-                    Console.Write("┌");
-                }
-                else if (b == yLimit - 1)
-                {
-                    Console.Write("└");
-                }
-                else
-                {
-                    Console.Write("│");
-                }
+                alienTimer.Interval = 500;
 
-                for (int c = 0; c < xLimit + (diffrence * 2); c++)
-                {
-                    if (b == 0 || b == yLimit - 1)
-                    {
-                        Console.Write("─");
-                    }
-
-
-                }
-                Console.SetCursorPosition(_titlepauseLocation[0] + diffrence + xLimit, _titlepauseLocation[1] - (diffrence / 4) + b);
-                if (b == 0)
-                {
-                    Console.Write("┐");
-                }
-                else if (b == yLimit - 1)
-                {
-                    Console.Write("┘");
-                }
-                else
-                {
-                    Console.Write("│");
-                }
             }
-
-
-            if (_type == 3)
+            else if (_difficulty == 1)
             {
-                for (int a = 0; a < _titlepause.Count(); a++)
-                {
-
-                    Console.SetCursorPosition(_titlepauseLocation[0], _titlepauseLocation[1] + a);
-                    Console.WriteLine(_titlepause[a]);
-                }
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                for (int b = 0; b < _titleLeave.Count(); b++)
-                {
-
-                    Console.SetCursorPosition(_titleLeaveLocation[0], _titleLeaveLocation[1] + b);
-                    Console.WriteLine(_titleLeave[b]);
-                }
-
-                for (int c = 0; c < _titleContinue.Count(); c++)
-                {
-                    Console.SetCursorPosition(_titleContinueLocation[0], _titleContinueLocation[1] + c);
-                    Console.WriteLine(_titleContinue[c]);
-                }
+                alienTimer.Interval = 250;
             }
-            Console.SetCursorPosition(0, 34);
-            Console.Write(" ");
-
-            MenuPauseWritter(_menuLocation);
-
-            do
+            else
             {
-                _menuLocation = MenuPauseMove(_menuLocation);
-            } while (true);
+                alienTimer.Interval = 100;
+            }
+            */
+
 
         }
 
-        public bool MenuPauseMove(bool rubric)
-        {
-            ConsoleKeyInfo arrow = Console.ReadKey();
 
-            switch (arrow.Key)
-            {
-                case ConsoleKey.UpArrow:
-                    MenuPauseWritter(rubric);
-                    rubric = !rubric;
-                    break;
-                case ConsoleKey.DownArrow:
-                    MenuPauseWritter(rubric);
-                    rubric = !rubric;
-                    break;
-/*
-                case ConsoleKey.Enter:
-                    if (rubric)
-                        Game.restart();
-                    else
-
-                    break;*/
-            }
-            return rubric;
-
-        }
-
-        public void MenuPauseWritter(bool rubric)
-        {
-            for (int a = 0; a < 10; a++)
-            {
-                if (rubric)
-                {
-                    if (a < _titleContinue.Count())
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.SetCursorPosition(_titleContinueLocation[0], _titleContinueLocation[1] + a);
-                        Console.WriteLine(_titleContinue[a]);
-                    }
-                    if (a < _titleLeave.Count())
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.SetCursorPosition(_titleLeaveLocation[0], _titleLeaveLocation[1] + a);
-                        Console.WriteLine(_titleLeave[a]);
-                    }
-                }
-                else
-                {
-                    if (a < _titleContinue.Count())
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.SetCursorPosition(_titleContinueLocation[0], _titleContinueLocation[1] + a);
-                        Console.WriteLine(_titleContinue[a]);
-                    }
-                    if (a < _titleLeave.Count())
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.SetCursorPosition(_titleLeaveLocation[0], _titleLeaveLocation[1] + a);
-                        Console.WriteLine(_titleLeave[a]);
-                    }
-                }
-            }
-        }
 
         public void TitleWritter()
         {
@@ -281,24 +109,24 @@ namespace SpaceInvader
         public void MainMenuWritter()
         {
 
-            if (up == true && actualRubric > 0 && actualRubric < 5)
+            if (up == true && this.Main_actualRubric > 0 && Main_actualRubric < 5)
             {
-                Console.SetCursorPosition(0, titlesLocation[actualRubric + 1]);
-                Console.Write(titles[actualRubric + 1]);
+                Console.SetCursorPosition(0, titlesLocation[Main_actualRubric + 1]);
+                Console.Write(titles[Main_actualRubric + 1]);
             }
-            else if (up == false && actualRubric < 6 && actualRubric > 1)
+            else if (up == false && Main_actualRubric < 6 && Main_actualRubric > 1)
             {
-                Console.SetCursorPosition(0, titlesLocation[actualRubric - 1]);
-                Console.Write(titles[actualRubric - 1]);
-
+                Console.SetCursorPosition(0, titlesLocation[Main_actualRubric - 1]);
+                Console.Write(titles[Main_actualRubric - 1]);
+                
             }
-            else if (up == false && actualRubric == 1)
+            else if (up == false && Main_actualRubric == 1)
             {
                 Console.SetCursorPosition(0, titlesLocation[5]);
                 Console.Write(titles[5]);
 
             }
-            else if (up == true && actualRubric == 5)
+            else if (up == true && Main_actualRubric == 5)
             {
                 Console.SetCursorPosition(0, titlesLocation[1]);
                 Console.Write(titles[1]);
@@ -306,8 +134,8 @@ namespace SpaceInvader
             }
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition(0, titlesLocation[actualRubric]);
-            Console.Write(titles[actualRubric]);
+            Console.SetCursorPosition(0, titlesLocation[Main_actualRubric]);
+            Console.Write(titles[Main_actualRubric]);
             Console.ForegroundColor = ConsoleColor.White;
 
         }
@@ -318,21 +146,21 @@ namespace SpaceInvader
             switch (arrow.Key)
             {
                 case ConsoleKey.UpArrow:
-                    actualRubric--;
+                    Main_actualRubric--;
                     up = true;
-                    if (actualRubric <= 0)
+                    if (Main_actualRubric <= 0)
                     {
-                        actualRubric = 5;
+                        Main_actualRubric = 5;
                     }
                     MainMenuWritter();
                     break;
 
                 case ConsoleKey.DownArrow:
-                    actualRubric++;
+                    Main_actualRubric++;
                     up = false;
-                    if (actualRubric >= 6)
+                    if (Main_actualRubric >= 6)
                     {
-                        actualRubric = 1;
+                        Main_actualRubric = 1;
                     }
                     MainMenuWritter();
                     break;
@@ -341,26 +169,26 @@ namespace SpaceInvader
                     break;
             }
 
-            return actualRubric;
+            return Main_actualRubric;
         }
 
-        public short MainMenuActions()
+        public void MainMenuActions()
         {
-            switch (actualRubric)
+            switch (Main_actualRubric)
             {
                 case 1:
-                    game.gameStart();
+                  game.gameStart(_difficulty, _music);
                     break;
 
                 case 2:
                     SettingMenu();
+                    MainMenuDrawer();
                     break;
 
                 case 5:
                     Environment.Exit(0);
                     break;
             }
-            return actualRubric;
         }
 
 
@@ -371,23 +199,20 @@ namespace SpaceInvader
         public void SettingMenu()
         {
             bool end = true;
-            short actualRubric = 0;
 
             short dificulty = Difficulty;
             bool _music = true;
 
             SettingMenuDrawer();
             SettingMenuWritter();
-
+            bool test = true;
             do
             {
-                actualRubric = SettingMenuNavigation();
-                if (actualRubric == 2)
-                    end = false;
-
-            } while (end);
-            MainMenuDrawer();
-            MainMenuWritter();
+                SettingMenuNavigation();
+                if(Setting_actualRubric == 2)
+                   test = false;
+            } while (test);
+            Setting_actualRubric = 0;
         }
         public short SettingMenuDrawer()
         {
@@ -445,7 +270,7 @@ namespace SpaceInvader
 
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            if (actualRubric == 0)
+            if (Setting_actualRubric == 0)
             {
                 Console.SetCursorPosition(0, songLocation);
                 Console.WriteLine(songs[Convert.ToInt32(Music)]);
@@ -453,7 +278,7 @@ namespace SpaceInvader
                 Console.SetCursorPosition(0, dificultyLocation);
                 Console.WriteLine(dificultyTitle[dificulty]);
             }
-            else if (actualRubric == 1)
+            else if (Setting_actualRubric == 1)
             {
                 Console.SetCursorPosition(0, dificultyLocation);
                 Console.WriteLine(dificultyTitle[dificulty]);
@@ -462,44 +287,41 @@ namespace SpaceInvader
                 Console.WriteLine(songs[Convert.ToInt32(Music)]);
             }
             Console.ForegroundColor = ConsoleColor.White;
-
         }
-        public short SettingMenuNavigation()
+        public void SettingMenuNavigation()
         {
             ConsoleKeyInfo arrow = Console.ReadKey();
 
             switch (arrow.Key)
             {
                 case ConsoleKey.UpArrow:
-                    if (actualRubric == 0)
-                        actualRubric = 1;
-                    else if (actualRubric == 1)
-                        actualRubric = 0;
-                    SettingMenuWritter();
+                    if (this.Setting_actualRubric == 0)
+                        this.Setting_actualRubric = 1;
+                    else if (Setting_actualRubric == 1)
+                        this.Setting_actualRubric = 0;
+                        SettingMenuWritter();
                     break;
 
                 case ConsoleKey.DownArrow:
-                    if (actualRubric == 0)
-                        actualRubric = 1;
-                    else if (actualRubric == 1)
-                        actualRubric = 0;
-                    SettingMenuWritter();
+                    if (this.Setting_actualRubric == 0)
+                        this.Setting_actualRubric = 1;
+                    else if (this.Setting_actualRubric == 1)
+                        this.Setting_actualRubric = 0;
+                        SettingMenuWritter();
                     break;
                 case ConsoleKey.Enter:
                     SettingMenuActions();
                     break;
                 case ConsoleKey.Escape:
-                    actualRubric = 2;
+                    this.Setting_actualRubric = 2;
                     break;
             }
-
-            return actualRubric;
         }
         public void SettingMenuActions()
         {
 
 
-            switch (actualRubric)
+            switch (Setting_actualRubric)
             {
                 case 0:
                     Music = !Music;

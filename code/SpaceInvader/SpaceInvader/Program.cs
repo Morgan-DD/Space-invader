@@ -12,8 +12,16 @@ namespace SpaceInvader
         {
             Menu menu = new Menu(0);
 
+            Console.SetWindowSize(120, 58);
+            Console.CursorVisible = false;
+            
+
             menu.MainMenuDrawer();
 
+            do
+            {
+                menu.MainMenuNavigation();
+            }while (true);
         }
     }
 }
