@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
+using System.IO;
+
+
 
 namespace SpaceInvader
 {
@@ -22,6 +25,7 @@ namespace SpaceInvader
 
         SpaceShip _ship;
 
+
         string[] _titlepause = new string[6];
         int[] _titlepauseLocation = new int[2];
 
@@ -33,27 +37,52 @@ namespace SpaceInvader
 
         bool _menuLocation = true;
         int space = 6;
-        int _type;
 
-        bool _pauseMenu = true;
+
+        int _nbDie = 0;
+
+        int _gameScore = 0;
+
+        bool _canShoot = true;
+
+        int _endPassage = 0;
+        int _endPassageLimit = 5;
+
+        string cheminsettings = "Settings.txt";
 
 
         //Menu menu = new Menu(3);
 
         System.Timers.Timer alienTimer = new System.Timers.Timer();
+        System.Timers.Timer _endTimer = new System.Timers.Timer();
 
         List<Bullet> _shoot = new List<Bullet>();
 
+        public bool GetCanShoot { get => _canShoot; set => _canShoot = value; }
 
-        public Game(SpaceShip ship)
+        public Game(SpaceShip ship, short difficulty = 0)
         {
             _ship = ship;
-            //-----------------------------------------------------------------------------//
-            alienTimer.Interval = 50;
-            //-----------------------------------------------------------------------------//
+
+            if (_difficulty == 0)
+            {
+                alienTimer.Interval = 250;
+
+            }
+            else if (_difficulty == 1)
+            {
+                alienTimer.Interval = 100;
+            }
+            else
+            {
+                alienTimer.Interval = 50;
+            }
+
+            _endTimer.Interval = 50;
+            alienTimer.Interval = 5;
 
             alienTimer.Elapsed += alienTimer_Tick;
-
+            _endTimer.Elapsed += _endTimer_Tick;
 
 
 
@@ -90,117 +119,131 @@ namespace SpaceInvader
 
             _titleContinueLocation[0] = 37;
             _titleContinueLocation[1] = _titleLeaveLocation[1] + Convert.ToString(_titleLeaveLocation[1]).Count() + space;
-
+            _difficulty = difficulty;
         }
 
 
 
         private void alienTimer_Tick(object sender, System.EventArgs e)
         {
+
             _error = false;
-            for (int c = 0; c < _alienList.Count; c++)
+            _nbDie = 0;
+            if (_alienList.Count > 0)
             {
-                if (_positionAlien)
+                for (int c = 0; c < _alienList.Count; c++)
                 {
-                    _positionAlien = false;
-                }
-                else
-                {
-                    _positionAlien = true;
-                }
-
-                if (_alienDirection)
-                {
-                    if (_alienList[c].X >= 104)
+                    if (_positionAlien)
                     {
-                        _error = true;
-                        _alienDirection = false;
-                        alienDown();
+                        _positionAlien = false;
                     }
                     else
                     {
-                        _error = false;
+                        _positionAlien = true;
                     }
-                }
-                else
-                {
-                    if (_alienList[c].X <= 1)
-                    {
-                        _error = true;
-                        _alienDirection = true;
-                        alienDown();
-                    }
-                    else
-                    {
-                        _error = false;
-                    }
-                }
-                _moove = false;
-                _moove = _alienList[c].writeAliens(_positionAlien);
 
-
-
-              
-
-            }
-            if (_error)
-            {
-                _alienDirection = !_alienDirection;
-                alienDown();
-            }
-            else
-            {
-                for (int d = 0; d < _alienList.Count; d++)
-                {
                     if (_alienDirection)
                     {
-                        _alienList[d].X += 1;
+                        if (_alienList[c].X >= 104)
+                        {
+                            _error = true;
+                            _alienDirection = false;
+                            alienDown();
+                        }
+                        else
+                        {
+                            _error = false;
+                        }
                     }
                     else
                     {
-                        _alienList[d].X -= 1;
-                    }
-                }
-            }
-            bool delet = false;
-            for(int x = 0; x < _shoot.Count; x++)
-            {
-                delet = _shoot[x].Mouve();
-                if (delet)
-                {
-                    _shoot.Remove(_shoot[x]);
-                }
-
-                for (int v = 0; v < _alienList.Count; v++)
-                {
-                    if (_shoot[x].Y > _alienList[v].Y && _shoot[x].Y < _alienList[v].Y + 5)
-                    {
-                        if(_shoot[x].X > _alienList[v].X && _shoot[x].X < _alienList[v].X + 5)
+                        if (_alienList[c].X <= 1)
                         {
-                            Die(v);
-                            _shoot.RemoveAt(x);
+                            _error = true;
+                            _alienDirection = true;
+                            alienDown();
                         }
-
-
-                        Console.SetCursorPosition(0, 0);
-                        Console.Write("a");
+                        else
+                        {
+                            _error = false;
+                        }
                     }
+                    _moove = false;
+                    _moove = _alienList[c].writeAliens(_positionAlien);
+
+
+
+
+
+                }
+                if (_error)
+                {
+                    _alienDirection = !_alienDirection;
+                    alienDown();
+                }
+                else
+                {
+                    for (int d = 0; d < _alienList.Count; d++)
+                    {
+                        if (_alienDirection)
+                        {
+                            _alienList[d].X += 1;
+                        }
+                        else
+                        {
+                            _alienList[d].X -= 1;
+                        }
+                    }
+                }
+                bool delet = false;
+                for (int x = 0; x < _shoot.Count; x++)
+                {
+                    delet = _shoot[x].Mouve();
+                    if (delet)
+                    {
+                        Console.SetCursorPosition(_shoot[x].X, _shoot[x].Y);
+                        Console.Write(" ");
+                        _shoot.Remove(_shoot[x]);
+                    }
+                    else
+                    {
+                        if (x > 0)
+                        {
+                            for (int v = 0; v < _alienList.Count - 1; v++)
+                            {
+                                if (_shoot[x - 1].Y >= _alienList[v].Y && _shoot[x - 1].Y <= _alienList[v].Y + 5)
+                                {
+                                    if (_shoot[x - 1].X > _alienList[v].X + 3 && _shoot[x - 1].X < _alienList[v].X + 14)
+                                    {
+                                        Die(v);
+                                        _nbDie++;
+                                        Console.SetCursorPosition(_shoot[x].X, _shoot[x].Y);
+                                        Console.Write(" ");
+                                        _shoot.RemoveAt(x);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+                if (_nbDie > 0)
+                {
+                    Console.SetCursorPosition(0, 0);
+                    Console.WriteLine((_gameScore) + " points");
+                    _gameScore += 100 * _nbDie;
                 }
 
             }
-
         }
-
-
 
         public void Die(int alienId)
         {
-            for(int a = 0; a < 5; a++)
+            for (int a = 0; a < 5; a++)
             {
                 Console.SetCursorPosition(_alienList[alienId].X, _alienList[alienId].Y + a);
-                Console.Write("                    ");
+                Console.Write("              ");
             }
-
             _alienList.RemoveAt(alienId);
         }
 
@@ -209,13 +252,14 @@ namespace SpaceInvader
             _ship.Game = game;
         }
 
-        public void gameStart(short difficulty,bool music)
+        public void gameStart(short difficulty, bool music)
         {
             _difficulty = difficulty;
             _music = music;
 
+
             alienTimer.Start();
-            _ship.WriteShip();
+            _ship.StartShootTimer(true);
 
             Console.Clear();
             Console.SetCursorPosition(0, 50);
@@ -233,36 +277,48 @@ namespace SpaceInvader
                     _alienList.Add(new Alien(a % 2 == 0, b * 15 + 20, a * 7 + 8));
                 }
             }
+            _alienList[0].writeAlienShip();
+            _ship.WriteShip();
 
-            bool test = true;
+            int test = 0;
 
             do
             {
                 ConsoleKeyInfo arrow = Console.ReadKey();
                 if (_moove)
                 {
+                    if (test == 2)
+                    {
+                        gameRestart();
+                        test = 0;
+                    }
                     switch (arrow.Key)
                     {
                         case ConsoleKey.RightArrow:
-                            if (_ship.X < 120 -  1 - _ship.GetShipLength())
+                            if (_ship.X < 120 - 1 - _ship.GetShipLength())
                                 _ship.X += 1;
+                            _ship.WriteShip();
                             break;
 
                         case ConsoleKey.LeftArrow:
                             if (_ship.X > 1)
                                 _ship.X -= 1;
+                            _ship.WriteShip();
                             break;
                         case ConsoleKey.Spacebar:
-                            _ship.Shoot();
+                            _canShoot = _ship.Shoot();
+
                             break;
                         case ConsoleKey.Escape:
                             test = gamePause();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.SetCursorPosition(1, 0);
+                            Console.Write(test);
                             break;
                     }
-                    _ship.WriteShip();
                 }
 
-            } while (test);
+            } while (test != 1);
 
         }
 
@@ -272,13 +328,16 @@ namespace SpaceInvader
         }
 
 
-        public void menuAffiche()
+
+
+        public int menuPauseAffiche()
         {
             int diffrence = 15;
             int yLimit = _titleContinueLocation[1] + 5;
             int xLimit = 27;
             for (int b = 0; b < yLimit; b++)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.SetCursorPosition(_titlepauseLocation[0] - diffrence, _titlepauseLocation[1] - (diffrence / 4) + b);
                 if (b == 0)
                 {
@@ -317,63 +376,68 @@ namespace SpaceInvader
                 }
             }
 
-           
-                for (int a = 0; a < _titlepause.Count(); a++)
-                {
 
-                    Console.SetCursorPosition(_titlepauseLocation[0], _titlepauseLocation[1] + a);
-                    Console.WriteLine(_titlepause[a]);
-                }
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                for (int b = 0; b < _titleLeave.Count(); b++)
-                {
+            for (int a = 0; a < _titlepause.Count(); a++)
+            {
 
-                    Console.SetCursorPosition(_titleLeaveLocation[0], _titleLeaveLocation[1] + b);
-                    Console.WriteLine(_titleLeave[b]);
-                }
+                Console.SetCursorPosition(_titlepauseLocation[0], _titlepauseLocation[1] + a);
+                Console.WriteLine(_titlepause[a]);
+            }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            for (int b = 0; b < _titleLeave.Count(); b++)
+            {
 
-                for (int c = 0; c < _titleContinue.Count(); c++)
-                {
-                    Console.SetCursorPosition(_titleContinueLocation[0], _titleContinueLocation[1] + c);
-                    Console.WriteLine(_titleContinue[c]);
-                }
-            
+                Console.SetCursorPosition(_titleLeaveLocation[0], _titleLeaveLocation[1] + b);
+                Console.WriteLine(_titleLeave[b]);
+            }
+
+            for (int c = 0; c < _titleContinue.Count(); c++)
+            {
+                Console.SetCursorPosition(_titleContinueLocation[0], _titleContinueLocation[1] + c);
+                Console.WriteLine(_titleContinue[c]);
+            }
+
             Console.SetCursorPosition(0, 34);
             Console.Write(" ");
 
             MenuPauseWritter(_menuLocation);
-
+            int continuer = 0;
             do
             {
-                _menuLocation = MenuPauseMove(_menuLocation);
-            } while (_pauseMenu);
-
+                continuer = MenuPauseMove(_menuLocation);
+            } while (continuer == 0);
+            return continuer;
         }
 
-        public bool MenuPauseMove(bool rubric)
+        public int MenuPauseMove(bool rubric)
         {
             ConsoleKeyInfo arrow = Console.ReadKey();
-
+            int value = 0;
             switch (arrow.Key)
             {
                 case ConsoleKey.UpArrow:
                     MenuPauseWritter(rubric);
-                    rubric = !rubric;
+                    this._menuLocation = !rubric;
                     break;
                 case ConsoleKey.DownArrow:
                     MenuPauseWritter(rubric);
-                    rubric = !rubric;
+                    this._menuLocation = !rubric;
                     break;
 
                 case ConsoleKey.Enter:
 
                     if (rubric)
-                        _pauseMenu = false;
-
+                    {
+                        value = 2;
+                    }
+                    else
+                    {
+                        value = 1;
+                    }
 
                     break;
             }
-            return rubric;
+            return value;
 
         }
 
@@ -421,20 +485,10 @@ namespace SpaceInvader
             for (int c = 0; c < _alienList.Count; c++)
             {
                 _alienList[c].Y += 1;
+                Console.SetCursorPosition(_alienList[c].X, _alienList[c].Y - 1);
+                Console.WriteLine("                     ");
             }
-            for (int d = 0; d < 120; d++)
-            {
-                Console.SetCursorPosition(d, _alienList[0].Y - 1);
-                Console.Write(" ");
-
-                Console.SetCursorPosition(d, _alienList[5].Y - 1);
-                Console.Write(" ");
-
-                
-                Console.SetCursorPosition(d, _alienList[10].Y - 1);
-                Console.Write(" ");
-            }
-            if (_alienList[14].Y == 45)
+            if (_alienList[_alienList.Count - 1].Y == 45)
             {
                 gameEnd(0);
             }
@@ -446,7 +500,7 @@ namespace SpaceInvader
             switch (end)
             {
                 case 0:
-                    gameLoose();
+                    _endTimer.Start();
                     break;
                 case 1:
                     break;
@@ -457,19 +511,106 @@ namespace SpaceInvader
 
         }
 
-        public bool gamePause()
+        public int gamePause()
         {
             alienTimer.Stop();
+            _ship.StartShootTimer(false);
+            return menuPauseAffiche();
 
-            menuAffiche();
-            return false;
         }
 
         public void gameLoose()
         {
             Console.Clear();
-            Console.SetCursorPosition(0, 20);
-            Console.WriteLine("Perdu");
+            string toWrite = "Perdu";
+            Console.SetCursorPosition(60, 20);
+            Console.Write(toWrite);
+
+            Console.SetCursorPosition(50, 20);
+            Console.Write("Choissisez un pseudo : ");
+
+            string pseudo = Console.ReadLine();
+            if (!File.Exists(cheminsettings))
+            {
+                using (FileStream fs = File.Create(cheminsettings)) {
+                    Byte[] title = new UTF8Encoding(true).GetBytes("New Text File");
+                    fs.Write(title, 0, title.Length);
+                    byte[] author = new UTF8Encoding(true).GetBytes("Mahesh Chand");
+                    fs.Write(author, 0, author.Length);
+                }
+            }
+        }
+
+        public void _endTimer_Tick(object sender, System.EventArgs e)
+        {
+            Console.Clear();
+            _endPassage++;
+            if(_endPassage <= _endPassageLimit)
+            {
+                _endTimer.Stop();
+                gameClear();
+                gameLoose();
+            }
+        }
+
+        public void gameClear()
+        {
+            _alienList.Clear();
+            _nbDie = 0;
+            _gameScore = 0;
+            _shoot.Clear();
+
+        }
+
+        public void gameRestart()
+        {
+            MenuPauseClear();
+
+            for (int c = 0; c < _alienList.Count; c++)
+            {
+                _alienList[c].writeAliens(_positionAlien);
+            }
+
+
+            alienTimer.Start();
+            _ship.StartShootTimer(true);
+        }
+
+        public void MenuPauseClear()
+        {
+            int yLimit = _titleContinueLocation[1] + 5;
+            int xLimit = 27;
+            int diffrence = 15;
+            for (int b = 0; b < yLimit; b++)
+            {
+                Console.SetCursorPosition(_titlepauseLocation[0] - diffrence, _titlepauseLocation[1] - (diffrence / 4) + b);
+
+                for (int a = 0; a < xLimit * 2 + 5; a++)
+                {
+                    Console.Write(" ");
+                }
+            }
+        }
+
+        public int GetShootSpeed()
+        {
+            int speed = 0;
+            if (_difficulty == 0)
+            {
+
+                speed = 2 * 500;
+            }
+            else if (_difficulty == 1)
+            {
+                speed = 750;
+
+            }
+            else if (_difficulty == 2)
+            {    
+                speed =  700;
+            }
+
+            return speed;
         }
     }
 }

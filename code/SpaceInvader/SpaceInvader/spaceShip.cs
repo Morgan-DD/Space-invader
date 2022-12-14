@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace SpaceInvader
 {
@@ -12,22 +13,24 @@ namespace SpaceInvader
         string _type;
         string _color;
 
-        int _fireTime = 1000;
 
         int _x;
 
         bool direction;
-        List<Bullet> _bullets = new List<Bullet>();
 
         Game _game;
 
-        bool _canShoot = true;
 
         private string[] _spaceShip = new string[5];
+
+        System.Timers.Timer shootTimer = new System.Timers.Timer();
 
 
         public SpaceShip()
         {
+            
+            shootTimer.Elapsed += shootTimer_Tick;
+
 
             _spaceShip[0] = "        ▄        ";
             _spaceShip[1] = "       ███       ";
@@ -55,12 +58,6 @@ namespace SpaceInvader
             set { direction = value; }
         }
 
-        public int GetShipFireTime
-        {
-            get { return _fireTime; }
-            set { _fireTime = value; }
-        }
-
 
         public int X
         {
@@ -69,6 +66,7 @@ namespace SpaceInvader
         }
 
         public Game Game { get => _game; set => _game = value; }
+        public Timer GetShootTimer { get => shootTimer; set => shootTimer = value; }
 
         public int GetShipLength()
         {
@@ -97,11 +95,35 @@ namespace SpaceInvader
             }
         }
 
-
-
-        public void Shoot()
+        public bool Shoot()
         {
-            _game.newShoot(_x, true);
+            bool canShoot = _game.GetCanShoot;
+            if (canShoot)
+            {
+                _game.newShoot(_x, true);
+                canShoot = false;
+            }
+            return false;
+        }
+
+        public void shootTimer_Tick(object sender, System.EventArgs e)
+        {
+            shootTimer.Interval = _game.GetShootSpeed();
+            bool canShoot = _game.GetCanShoot;
+            if (!canShoot)
+                _game.GetCanShoot = true;
+        }
+
+        public void StartShootTimer(bool option)
+        {
+            if (option)
+            {
+                shootTimer.Start();
+            }
+            else
+            {
+                shootTimer.Stop();
+            }
         }
     }
 }

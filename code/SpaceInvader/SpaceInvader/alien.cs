@@ -11,7 +11,6 @@ namespace SpaceInvader
         private bool _type;
         private int _x;
         private int _y;
-        private int _speed;
 
 
 

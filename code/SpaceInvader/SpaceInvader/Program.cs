@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SpaceInvader
 {
     class Program
@@ -14,14 +15,25 @@ namespace SpaceInvader
 
             Console.SetWindowSize(120, 58);
             Console.CursorVisible = false;
+
+
             
 
-            menu.MainMenuDrawer();
 
+            
+                menu.MainMenuDrawer();
             do
             {
                 menu.MainMenuNavigation();
             }while (true);
+            
+
+            
+
+
+            Console.ReadLine();
+
+
         }
     }
 }

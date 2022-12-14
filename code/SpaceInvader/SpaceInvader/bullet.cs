@@ -12,7 +12,6 @@ namespace SpaceInvader
         int _x;
         int _y;
         bool _direction;
-        int speed;
 
         public Bullet(int x, int y, bool direction){
 
@@ -37,11 +36,12 @@ namespace SpaceInvader
             {
                 _y += 1;
             }
-            if (_y < 3)
+            if (_y <= 4)
             {
                 return true;
             }
             Console.SetCursorPosition(_x, _y);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("|");
             return false;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.IO;
 namespace SpaceInvader
 {
     internal class Menu
@@ -19,7 +19,7 @@ namespace SpaceInvader
 
         Game game = new Game(new SpaceShip());
 
-
+        bool _writeMenu = false;
 
         public string[] titles = new string[6];
  
@@ -29,6 +29,9 @@ namespace SpaceInvader
 
         short _difficulty = 0;
         bool _music = true;
+
+        string cheminsettings = "Settings.txt";
+
 
         public short Difficulty { get => _difficulty; set => _difficulty = value; }
         public bool Music { get => _music; set => _music = value; }
@@ -53,21 +56,8 @@ namespace SpaceInvader
                 titlesLocation[4] = 38;
                 titlesLocation[5] = 47;
 
-            /*
-            if (_difficulty == 0)
-            {
-                alienTimer.Interval = 500;
-
-            }
-            else if (_difficulty == 1)
-            {
-                alienTimer.Interval = 250;
-            }
-            else
-            {
-                alienTimer.Interval = 100;
-            }
-            */
+           
+            
 
 
         }
@@ -97,6 +87,7 @@ namespace SpaceInvader
         {
             Console.Clear();
             Console.SetCursorPosition(0, 12);
+            Console.ForegroundColor = ConsoleColor.White;
             for (int a = 1; a < titles.Length; a++)
             {
                 Console.Write(titles[a] + "\n\n");
@@ -141,6 +132,13 @@ namespace SpaceInvader
         }
         public short MainMenuNavigation()
         {
+            if (_writeMenu)
+            {
+                game.gameClear();
+                MainMenuDrawer();
+                _writeMenu = false;
+            }
+
             ConsoleKeyInfo arrow = Console.ReadKey();
 
             switch (arrow.Key)
@@ -166,6 +164,7 @@ namespace SpaceInvader
                     break;
                 case ConsoleKey.Enter:
                     MainMenuActions();
+                    _writeMenu = true;
                     break;
             }
 
@@ -216,6 +215,20 @@ namespace SpaceInvader
         }
         public short SettingMenuDrawer()
         {
+            if (!File.Exists(cheminsettings))
+            {
+                using (FileStream fs = File.Create(cheminsettings))
+                {
+                    Byte[] title = new UTF8Encoding(true).GetBytes(Convert.ToString(_music));
+                    fs.Write(title, 0, title.Length);
+                    byte[] author = new UTF8Encoding(true).GetBytes(Convert.ToString(_difficulty));
+                    fs.Write(author, 0, author.Length);
+                }
+            }
+            else
+            {
+
+            }
             Console.Clear();
             string[] settings = new string[8];
             settings[0] = "                                                       _____\n                                                      /  ___|\n                                                      \\ `--.  ___  _ __\n                                                       `--. \\/ _ \\| '_ \\\n                                                      /\\__/ / (_) | | | |\n                                                      \\____/ \\___/|_| |_|\n";
