@@ -1,0 +1,25 @@
+Ce jeux space invader à été crée dans le cadre du projet P_Dev
+à l'ETML durant ma deuxieme année lors du premier semestre.
+--------------------------------------------------------
+Le but est de tirer sur les aliens afin de les tuers pour recolter des points
+afin de se classer le plus haut possible dans le classement.
+Il faut aussi éviter de recevoir des tirs enemis.
+
+
+
+
+
+
+
+
+                                 Création d'un programme de type jeux pour un projet.
+                                 Ce petit jeux est le jeux Space Invaders, vous avez plusieur vie,
+                                 est le des invaders vous tires dessus. Le but du jeux est d'élimnier
+                                 les invaders avant qu'ils n'arrivent à vos rempart. Bien sur le but est
+                                 aussi de faire le meilleur score possibles!
+
+
+
+
+
+                                      Appuyez sur escape pour revenir au menu.

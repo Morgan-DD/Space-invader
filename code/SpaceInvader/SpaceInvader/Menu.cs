@@ -22,16 +22,19 @@ namespace SpaceInvader
         bool _writeMenu = false;
 
         public string[] titles = new string[6];
- 
+
         short[] titlesLocation = new short[6];
 
         short Setting_actualRubric = 0;
 
         bool _music = true;
-        Game game = new Game(new SpaceShip());
 
         string _cheminsettings = "Settings.txt";
+        string _cheminscore = "Scores.txt";
 
+        Game game = new Game(new SpaceShip());
+
+        public string[] _hightScoreTitle = new string[8];
 
         public short Difficulty { get => _difficulty; set => _difficulty = value; }
         public bool Music { get => _music; set => _music = value; }
@@ -40,27 +43,38 @@ namespace SpaceInvader
         {
             string[] value = new string[2];
             game.giveGameToShip(game);
-                
+            game.Cheminscore = _cheminscore;
 
-            
-                titles[0] = "                               _____                        _____                    _  	   \n                              /  ___|                      |_   _|                  | |	   \n                              \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __ \n                               `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                              /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |   \n                              \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|   \n                                    | |                                                          \n                                    |_|                                                          \n";
-                titles[1] = "                                                   ___                                         \n                                                  |_  |                                        \n                                                    | | ___  _   _  ___ _ __                   \n                                                    | |/ _ \\| | | |/ _ \\ '__|                  \n                                                /\\__/ / (_) | |_| |  __/ |                     \n                                                \\____/ \\___/ \\__,_|\\___|_|                     \n";
-                titles[2] = "                                              _____       _   _\n                                             |  _  |     | | (_)\n                                             | | | |_ __ | |_ _  ___  _ __  ___\n                                             | | | | '_ \\| __| |/ _ \\| '_ \\/ __|\n                                             \\ \\_/ / |_) | |_| | (_) | | | \\__ \\\n                                              \\___/| .__/ \\__|_|\\___/|_| |_|___/\n                                                   | |\n                                                   |_|";
-                titles[3] = "                                      _   _ _       _     _   _____\n                                     | | | (_)     | |   | | /  ___|\n                                     | |_| |_  __ _| |__ | |_\\ `--.  ___ ___  _ __ ___\n                                     |  _  | |/ _` | '_ \\| __|`--. \\/ __/ _ \\| '__/ _ \\\n                                     | | | | | (_| | | | | |_/\\__/ / (_| (_) | | |  __/\n                                     \\_| |_/_|\\__, |_| |_|\\__\\____/ \\___\\___/|_|  \\___|\n                                               __/ |\n                                              |___/";
-                titles[4] = "                                             ___   ______\n                                            / _ \\  | ___ \\\n                                           / /_\\ \\ | |_/ / __ ___  _ __   ___  ___                 \n                                           |  _  | |  __/ '__/ _ \\| '_ \\ / _ \\/ __|\n                                           | | | | | |  | | | (_) | |_) | (_) \\__ \\\n                                           \\_| |_/ \\_|  |_|  \\___/| .__/ \\___/|___/\n                                                                  | |\n                                                                  |_|";
-                titles[5] = "                                                _____       _ _   _\n                                               |  _  |     (_) | | |\n                                               | | | |_   _ _| |_| |_ ___ _ __\n                                               | | | | | | | | __| __/ _ \\ '__|\n                                               \\ \\/' / |_| | | |_| ||  __/ |\n                                                \\_/\\_\\__,_|_|\\__|\\__\\___|_|";
 
-                titlesLocation[0] = 2;
-                titlesLocation[1] = 12;
-                titlesLocation[2] = 20;
-                titlesLocation[3] = 29;
-                titlesLocation[4] = 38;
-                titlesLocation[5] = 47;
+            titles[0] = "                               _____                        _____                    _  	   \n                              /  ___|                      |_   _|                  | |	   \n                              \\ `--. _ __   __ _  ___ ___    | | _ ____   ____ _  __| | ___ _ __ \n                               `--. \\ '_ \\ / _` |/ __/ _ \\   | || '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\n                              /\\__/ / |_) | (_| | (_|  __/  _| || | | \\ V / (_| | (_| |  __/ |   \n                              \\____/| .__/ \\__,_|\\___\\___|  \\___/_| |_|\\_/ \\__,_|\\__,_|\\___|_|   \n                                    | |                                                          \n                                    |_|                                                          \n";
+            titles[1] = "                                                   ___                                         \n                                                  |_  |                                        \n                                                    | | ___  _   _  ___ _ __                   \n                                                    | |/ _ \\| | | |/ _ \\ '__|                  \n                                                /\\__/ / (_) | |_| |  __/ |                     \n                                                \\____/ \\___/ \\__,_|\\___|_|                     \n";
+            titles[2] = "                                              _____       _   _\n                                             |  _  |     | | (_)\n                                             | | | |_ __ | |_ _  ___  _ __  ___\n                                             | | | | '_ \\| __| |/ _ \\| '_ \\/ __|\n                                             \\ \\_/ / |_) | |_| | (_) | | | \\__ \\\n                                              \\___/| .__/ \\__|_|\\___/|_| |_|___/\n                                                   | |\n                                                   |_|";
+            titles[3] = "                                         _   _ _       _     _____\n                                        | | | (_)     | |   /  ___|\n                                        | |_| |_  __ _| |__ \\ `--.  ___ ___  _ __ ___\n                                        |  _  | |/ _` | '_ \\ `--. \\/ __/ _ \\| '__/ _ \\\n                                        | | | | | (_| | | | /\\__/ / (_| (_) | | |  __/\n                                        \\_| |_/_|\\__, |_| |_\\____/ \\___\\___/|_|  \\___|\n                                                  __/ |\n                                                 |___/";
+            titles[4] = "                                             ___   ______\n                                            / _ \\  | ___ \\\n                                           / /_\\ \\ | |_/ / __ ___  _ __   ___  ___                 \n                                           |  _  | |  __/ '__/ _ \\| '_ \\ / _ \\/ __|\n                                           | | | | | |  | | | (_) | |_) | (_) \\__ \\\n                                           \\_| |_/ \\_|  |_|  \\___/| .__/ \\___/|___/\n                                                                  | |\n                                                                  |_|";
+            titles[5] = "                                                _____       _ _   _\n                                               |  _  |     (_) | | |\n                                               | | | |_   _ _| |_| |_ ___ _ __\n                                               | | | | | | | | __| __/ _ \\ '__|\n                                               \\ \\/' / |_| | | |_| ||  __/ |\n                                                \\_/\\_\\__,_|_|\\__|\\__\\___|_|";
+
+            titlesLocation[0] = 2;
+            titlesLocation[1] = 12;
+            titlesLocation[2] = 20;
+            titlesLocation[3] = 29;
+            titlesLocation[4] = 38;
+            titlesLocation[5] = 47;
+
+            _hightScoreTitle[0] = "                               _   _ _       _     _____\n                              | | | (_)     | |   /  ___|\n                              | | _ | | _  __ _| | __ \\ `--.___ ___ _ __ ___\n                              |  _  | |/ _` | '_ \\ `--. \\/ __/ _ \\| '__/ _ \\\n                              | | | | | (_| | | | /\\__/ / (_| (_) | | |  __/\n                              \\_| |_/_|\\__, |_| |_\\____/ \\___\\___/|_|  \\___|\n                                        __/ |\n                                       |___/";
+            _hightScoreTitle[1] = "| | | (_)     | |   /  ___|\n";
+            _hightScoreTitle[2] = "| |_| |_  __ _| |__ \\ `--.  ___ ___  _ __ ___\n";
+            _hightScoreTitle[3] = "|  _  | |/ _` | '_ \\ `--. \\/ __/ _ \\| '__/ _ \\\n";
+            _hightScoreTitle[4] = "| | | | | (_| | | | /\\__/ / (_| (_) | | |  __/\n";
+            _hightScoreTitle[5] = "\\_| |_/_|\\__, |_| |_\\____/ \\___\\___/|_|  \\___|\n";
+            _hightScoreTitle[6] = "          __/ |\n";
+            _hightScoreTitle[7] = "         |___/";
 
             value = File.ReadAllLines(_cheminsettings);
-            
+
             _difficulty = Convert.ToInt16(value[1]);
-            if (value[0] == "1")
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine(value[0]);
+            if (value[0] == "True")
             {
                 _music = true;
             }
@@ -122,7 +136,7 @@ namespace SpaceInvader
             {
                 Console.SetCursorPosition(0, titlesLocation[Main_actualRubric - 1]);
                 Console.Write(titles[Main_actualRubric - 1]);
-                
+
             }
             else if (up == false && Main_actualRubric == 1)
             {
@@ -179,6 +193,9 @@ namespace SpaceInvader
                     MainMenuActions();
                     _writeMenu = true;
                     break;
+                case ConsoleKey.Escape:
+                    Environment.Exit(0);
+                    break;
             }
 
             return Main_actualRubric;
@@ -189,7 +206,7 @@ namespace SpaceInvader
             switch (Main_actualRubric)
             {
                 case 1:
-                  game.gameStart();
+                    game.gameStart();
                     break;
 
                 case 2:
@@ -201,6 +218,10 @@ namespace SpaceInvader
                 case 3:
                     ScoreMenu();
                     break;
+                case 4:
+                    DetaiMenuDrawer();
+                    break;
+
                 case 5:
                     Environment.Exit(0);
                     break;
@@ -245,14 +266,14 @@ namespace SpaceInvader
             do
             {
                 SettingMenuNavigation();
-                if(Setting_actualRubric == 2)
-                   test = false;
+                if (Setting_actualRubric == 2)
+                    test = false;
             } while (test);
             Setting_actualRubric = 0;
         }
         public short SettingMenuDrawer()
         {
-           
+
             Console.Clear();
             string[] settings = new string[8];
             settings[0] = "                                                       _____\n                                                      /  ___|\n                                                      \\ `--.  ___  _ __\n                                                       `--. \\/ _ \\| '_ \\\n                                                      /\\__/ / (_) | | | |\n                                                      \\____/ \\___/|_| |_|\n";
@@ -285,8 +306,8 @@ namespace SpaceInvader
                 Console.ForegroundColor = ConsoleColor.White;
 
             }
-            Console.SetCursorPosition(55, 50);
-            Console.WriteLine("Press [Esc] to exit");
+            Console.SetCursorPosition(0, 50);
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + ("Press [Esc] to exit".Length / 2)) + "}", "Press [Esc] to exit"));
             return 2;
         }
         public void SettingMenuWritter()
@@ -336,7 +357,7 @@ namespace SpaceInvader
                         this.Setting_actualRubric = 1;
                     else if (Setting_actualRubric == 1)
                         this.Setting_actualRubric = 0;
-                        SettingMenuWritter();
+                    SettingMenuWritter();
                     break;
 
                 case ConsoleKey.DownArrow:
@@ -344,7 +365,7 @@ namespace SpaceInvader
                         this.Setting_actualRubric = 1;
                     else if (this.Setting_actualRubric == 1)
                         this.Setting_actualRubric = 0;
-                        SettingMenuWritter();
+                    SettingMenuWritter();
                     break;
                 case ConsoleKey.Enter:
                     SettingMenuActions();
@@ -391,6 +412,8 @@ namespace SpaceInvader
         {
             Console.Clear();
             string[] hightScoreTitle = new string[8];
+            string[] Scores = new string[2];
+
 
             hightScoreTitle[0] = @" _   _ _       _     _____";
             hightScoreTitle[1] = @"| | | (_)     | |   /  ___|";
@@ -402,16 +425,195 @@ namespace SpaceInvader
             hightScoreTitle[7] = @"         |___/  ";
 
 
-            for(int a = 0; a < hightScoreTitle.Length; a++)
+
+            for (int a = 0; a < hightScoreTitle.Length; a++)
             {
                 Console.SetCursorPosition(40, 5 + a);
                 Console.WriteLine(hightScoreTitle[a]);
-                
+
             }
+
+            Scores = File.ReadAllLines(_cheminscore);
+
+            int valuDepartY = 18;
+            int limite = Scores.Length;
+
+            for (int c = limite; c > 0; c--)
+            {
+                Console.SetCursorPosition(0, (valuDepartY + (limite * 2)) - (c * 2));
+                //Console.WriteLine(Scores[b]);
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (Scores[c - 1].Length / 2)) + "}", Scores[c - 1]));
+            }
+
+
+            int hauteur = (limite * 2) + (2 * 2) - 1;
+            int longeur = 30;
+            int departX = (120 - longeur) / 2;
+            int departY = valuDepartY - 2;
+            for (int b = 0; b < hauteur; b++)
+            {
+                Console.SetCursorPosition(departX, departY + b);
+                if (b == 0)
+                {
+                    Console.Write("┌");
+                }
+                else if (b == hauteur - 1)
+                {
+                    Console.Write("└");
+                }
+                else
+                {
+                    Console.Write("│");
+                }
+
+                for (int c = 0; c < longeur; c++)
+                {
+                    if (b == 0 || b == hauteur - 1)
+                    {
+                        Console.Write("─");
+                    }
+
+
+                }
+                Console.SetCursorPosition(departX + longeur, departY + b);
+                if (b == 0)
+                {
+                    Console.Write("┐");
+                }
+                else if (b == hauteur - 1)
+                {
+                    Console.Write("┘");
+                }
+                else
+                {
+                    Console.Write("│");
+                }
+            }
+
+            Console.SetCursorPosition(0, hauteur + departY + 1);
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + ("Press [Esc] to exit".Length / 2)) + "}", "Press [Esc] to exit"));
+
+            ConsoleKeyInfo arrow;
             bool verif = true;
+                do
+                {
+                    arrow = Console.ReadKey();
+
+                    switch (arrow.Key)
+                    {
+                        case ConsoleKey.Escape:
+                            verif = false;
+                            break;
+                    }
+                } while (verif);
+
+            
+        }
+
+        public void DetailMenu()
+        {
+            DetaiMenuDrawer();
+        }
+
+        public void DetaiMenuDrawer()
+        {
+            Console.Clear();
+            int nbLigneText = 6;
+            string[] detailTitle = new string[8];
+            string[] textDetail = new string[nbLigneText];
+            int taille = 10;
+            int valuDepartY = 16;
+
+
+
+            detailTitle[0] = @"  ___   ______";
+            detailTitle[1] = @" / _ \  | ___ \";
+            detailTitle[2] = @"/ /_\ \ | |_/ / __ ___  _ __   ___  ___ ";
+            detailTitle[3] = @"|  _  | |  __/ '__/ _ \| '_ \ / _ \/ __|";
+            detailTitle[4] = @"| | | | | |  | | | (_) | |_) | (_) \__ \";
+            detailTitle[5] = @"\_| |_/ \_|  |_|  \___/| .__/ \___/|___/";
+            detailTitle[6] = @"                       | |";
+            detailTitle[7] = @"                       |_|";
+
+            textDetail[0] = "Ce jeux space invader à été crée dans le cadre du projet P_Dev";
+            textDetail[1] = "à l'ETML durant ma deuxieme année lors du premier semestre.";
+            textDetail[2] = "----------------------------------------------------";
+            textDetail[3] = "Le but est de tirer sur les aliens afin de les tuers pour recolter des points";
+            textDetail[4] = "afin de se classer le plus haut possible dans le classement.";
+            textDetail[5] = "Il faut aussi éviter de recevoir des tirs enemis.";
+
+
+            for (int a = 0; a < detailTitle.Length; a++)
+            {
+                Console.SetCursorPosition(41, 5 + a);
+                Console.Write(detailTitle[a]);
+            }
+
+            int longeur = 0;
+            int hauteur = nbLigneText + 4;
+            int departY = valuDepartY - 2;
+            for (int c = 0; c < nbLigneText; c++)
+            {
+                Console.SetCursorPosition(0, valuDepartY + c);
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (textDetail[c].Length / 2)) + "}", textDetail[c]));
+                if (textDetail[c].Length > longeur)
+                {
+                    longeur = textDetail[c].Length;
+                }
+
+            }
+            longeur += 8;
+
+            int departX = (120 - longeur) / 2;
+            for (int b = 0; b < hauteur; b++)
+            {
+                Console.SetCursorPosition(departX, departY + b);
+                if (b == 0)
+                {
+                    Console.Write("┌");
+                }
+                else if (b == hauteur - 1)
+                {
+                    Console.Write("└");
+                }
+                else
+                {
+                    Console.Write("│");
+                }
+
+                for (int c = 0; c < longeur; c++)
+                {
+                    if (b == 0 || b == hauteur - 1)
+                    {
+                        Console.Write("─");
+                    }
+
+
+                }
+                Console.SetCursorPosition(departX + longeur, departY + b);
+                if (b == 0)
+                {
+                    Console.Write("┐");
+                }
+                else if (b == hauteur - 1)
+                {
+                    Console.Write("┘");
+                }
+                else
+                {
+                    Console.Write("│");
+                }
+            }
+
+           
+            Console.SetCursorPosition(0, hauteur + departY + 1);
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + ("Press [Esc] to exit".Length / 2)) + "}", "Press [Esc] to exit"));
+
+            bool verif = true;
+            ConsoleKeyInfo arrow;
             do
             {
-                ConsoleKeyInfo arrow = Console.ReadKey();
+                arrow = Console.ReadKey();
 
                 switch (arrow.Key)
                 {
@@ -420,6 +622,7 @@ namespace SpaceInvader
                         break;
                 }
             } while (verif);
+
 
         }
     }

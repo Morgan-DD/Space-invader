@@ -50,7 +50,7 @@ namespace SpaceInvader
 
         int _test = 0;
 
-        string _cheminscore = "Scores.txt";
+        string _cheminscore;
 
 
         //Menu menu = new Menu(3);
@@ -63,27 +63,16 @@ namespace SpaceInvader
         public bool GetCanShoot { get => _canShoot; set => _canShoot = value; }
         public short Difficulty { get => _difficulty; set => _difficulty = value; }
         public bool Music { get => _music; set => _music = value; }
+        public string Cheminscore { get => _cheminscore; set => _cheminscore = value; }
 
         public Game(SpaceShip ship)
         {
             _ship = ship;
 
-            if (_difficulty == 0)
-            {
-                alienTimer.Interval = 250;
-
-            }
-            else if (_difficulty == 1)
-            {
-                alienTimer.Interval = 100;
-            }
-            else
-            {
-                alienTimer.Interval = 50;
-            }
+            
 
             _endTimer.Interval = 50;
-            alienTimer.Interval = 5;
+          //  alienTimer.Interval = 5;
 
             alienTimer.Elapsed += alienTimer_Tick;
             _endTimer.Elapsed += _endTimer_Tick;
@@ -258,6 +247,19 @@ namespace SpaceInvader
         public void gameStart()
         {
 
+            if (_difficulty == 0)
+            {
+                alienTimer.Interval = 250;
+
+            }
+            else if (_difficulty == 1)
+            {
+                alienTimer.Interval = 100;
+            }
+            else
+            {
+                alienTimer.Interval = 50;
+            }
 
             alienTimer.Start();
             _ship.StartShootTimer(true);
@@ -280,12 +282,12 @@ namespace SpaceInvader
             }
             _alienList[0].writeAlienShip();
             _ship.WriteShip();
-
+            ConsoleKeyInfo arrow;
             do
             {
                 if (_test != 1)
                 {
-                    ConsoleKeyInfo arrow = Console.ReadKey();
+                    arrow = Console.ReadKey();
                     if (_moove)
                     {
                         if (_test == 2)
@@ -321,6 +323,7 @@ namespace SpaceInvader
                 }
 
             } while (_test != 1);
+            _test = 0;
             Console.Clear();
         }
 
@@ -336,7 +339,7 @@ namespace SpaceInvader
         {
             int diffrence = 15;
             int yLimit = _titleContinueLocation[1] + 5;
-            int xLimit = 27;
+            int longeur = 27;
             for (int b = 0; b < yLimit; b++)
             {
                 Console.ForegroundColor = ConsoleColor.White;
@@ -354,7 +357,7 @@ namespace SpaceInvader
                     Console.Write("│");
                 }
 
-                for (int c = 0; c < xLimit + (diffrence * 2); c++)
+                for (int c = 0; c < longeur + (diffrence * 2); c++)
                 {
                     if (b == 0 || b == yLimit - 1)
                     {
@@ -363,7 +366,7 @@ namespace SpaceInvader
 
 
                 }
-                Console.SetCursorPosition(_titlepauseLocation[0] + diffrence + xLimit, _titlepauseLocation[1] - (diffrence / 4) + b);
+                Console.SetCursorPosition(_titlepauseLocation[0] + diffrence + longeur, _titlepauseLocation[1] - (diffrence / 4) + b);
                 if (b == 0)
                 {
                     Console.Write("┐");
@@ -523,9 +526,14 @@ namespace SpaceInvader
             string pseudo = Console.ReadLine();
             if (!File.Exists(_cheminscore))
             {
-                using (FileStream fs = File.Create(_cheminscore)) {
-                    Byte[] title = new UTF8Encoding(true).GetBytes(pseudo + " : " + _gameScore);
-                    fs.Write(title, 0, title.Length);
+                if (_gameScore > 0)
+                {
+
+                    using (FileStream fs = File.Create(_cheminscore))
+                    {
+                        Byte[] title = new UTF8Encoding(true).GetBytes(pseudo + " : " + _gameScore);
+                        fs.Write(title, 0, title.Length);
+                    }
                 }
             }
             else
@@ -574,13 +582,13 @@ namespace SpaceInvader
         public void MenuPauseClear()
         {
             int yLimit = _titleContinueLocation[1] + 5;
-            int xLimit = 27;
+            int longeur = 27;
             int diffrence = 15;
             for (int b = 0; b < yLimit; b++)
             {
                 Console.SetCursorPosition(_titlepauseLocation[0] - diffrence, _titlepauseLocation[1] - (diffrence / 4) + b);
 
-                for (int a = 0; a < xLimit * 2 + 5; a++)
+                for (int a = 0; a < longeur * 2 + 5; a++)
                 {
                     Console.Write(" ");
                 }
