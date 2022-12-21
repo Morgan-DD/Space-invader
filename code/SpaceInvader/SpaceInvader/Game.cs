@@ -48,7 +48,9 @@ namespace SpaceInvader
         int _endPassage = 0;
         int _endPassageLimit = 5;
 
-        string cheminsettings = "Settings.txt";
+        int _test = 0;
+
+        string _cheminscore = "Scores.txt";
 
 
         //Menu menu = new Menu(3);
@@ -59,8 +61,10 @@ namespace SpaceInvader
         List<Bullet> _shoot = new List<Bullet>();
 
         public bool GetCanShoot { get => _canShoot; set => _canShoot = value; }
+        public short Difficulty { get => _difficulty; set => _difficulty = value; }
+        public bool Music { get => _music; set => _music = value; }
 
-        public Game(SpaceShip ship, short difficulty = 0)
+        public Game(SpaceShip ship)
         {
             _ship = ship;
 
@@ -119,7 +123,6 @@ namespace SpaceInvader
 
             _titleContinueLocation[0] = 37;
             _titleContinueLocation[1] = _titleLeaveLocation[1] + Convert.ToString(_titleLeaveLocation[1]).Count() + space;
-            _difficulty = difficulty;
         }
 
 
@@ -252,10 +255,8 @@ namespace SpaceInvader
             _ship.Game = game;
         }
 
-        public void gameStart(short difficulty, bool music)
+        public void gameStart()
         {
-            _difficulty = difficulty;
-            _music = music;
 
 
             alienTimer.Start();
@@ -280,46 +281,47 @@ namespace SpaceInvader
             _alienList[0].writeAlienShip();
             _ship.WriteShip();
 
-            int test = 0;
-
             do
             {
-                ConsoleKeyInfo arrow = Console.ReadKey();
-                if (_moove)
+                if (_test != 1)
                 {
-                    if (test == 2)
+                    ConsoleKeyInfo arrow = Console.ReadKey();
+                    if (_moove)
                     {
-                        gameRestart();
-                        test = 0;
-                    }
-                    switch (arrow.Key)
-                    {
-                        case ConsoleKey.RightArrow:
-                            if (_ship.X < 120 - 1 - _ship.GetShipLength())
-                                _ship.X += 1;
-                            _ship.WriteShip();
-                            break;
+                        if (_test == 2)
+                        {
+                            gameRestart();
+                            _test = 0;
+                        }
+                        switch (arrow.Key)
+                        {
+                            case ConsoleKey.RightArrow:
+                                if (_ship.X < 120 - 1 - _ship.GetShipLength())
+                                    _ship.X += 1;
+                                _ship.WriteShip();
+                                break;
 
-                        case ConsoleKey.LeftArrow:
-                            if (_ship.X > 1)
-                                _ship.X -= 1;
-                            _ship.WriteShip();
-                            break;
-                        case ConsoleKey.Spacebar:
-                            _canShoot = _ship.Shoot();
+                            case ConsoleKey.LeftArrow:
+                                if (_ship.X > 1)
+                                    _ship.X -= 1;
+                                _ship.WriteShip();
+                                break;
+                            case ConsoleKey.Spacebar:
+                                _canShoot = _ship.Shoot();
 
-                            break;
-                        case ConsoleKey.Escape:
-                            test = gamePause();
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.SetCursorPosition(1, 0);
-                            Console.Write(test);
-                            break;
+                                break;
+                            case ConsoleKey.Escape:
+                                _test = gamePause();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.SetCursorPosition(1, 0);
+                                Console.Write(_test);
+                                break;
+                        }
                     }
                 }
 
-            } while (test != 1);
-
+            } while (_test != 1);
+            Console.Clear();
         }
 
         public void newShoot(int x, bool direction)
@@ -497,18 +499,7 @@ namespace SpaceInvader
         public void gameEnd(int end)
         {
             alienTimer.Stop();
-            switch (end)
-            {
-                case 0:
-                    _endTimer.Start();
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-            }
-
-
+            _endTimer.Start();
         }
 
         public int gamePause()
@@ -530,14 +521,17 @@ namespace SpaceInvader
             Console.Write("Choissisez un pseudo : ");
 
             string pseudo = Console.ReadLine();
-            if (!File.Exists(cheminsettings))
+            if (!File.Exists(_cheminscore))
             {
-                using (FileStream fs = File.Create(cheminsettings)) {
-                    Byte[] title = new UTF8Encoding(true).GetBytes("New Text File");
+                using (FileStream fs = File.Create(_cheminscore)) {
+                    Byte[] title = new UTF8Encoding(true).GetBytes(pseudo + " : " + _gameScore);
                     fs.Write(title, 0, title.Length);
-                    byte[] author = new UTF8Encoding(true).GetBytes("Mahesh Chand");
-                    fs.Write(author, 0, author.Length);
                 }
+            }
+            else
+            {
+                if(_gameScore > 0)
+                File.WriteAllText(_cheminscore, File.ReadAllText(_cheminscore) + "\n" + pseudo + " : " + _gameScore);
             }
         }
 
@@ -551,6 +545,7 @@ namespace SpaceInvader
                 gameClear();
                 gameLoose();
             }
+            this._test = 1;
         }
 
         public void gameClear()
