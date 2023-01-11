@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SpaceInvader.Alien">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAYAAQAAAQAIAAAAIAAEAAAAAAEAQYAABgAYAA=</HashCode>
+      <FileName>alien.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.Bullet">
+    <Position X="7" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAAAAAAAIAAAAAAAAAAAAAAAAIAAAAYAA=</HashCode>
+      <FileName>bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.Game">
+    <Position X="5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CVmSIAkgAAAkEQMoglEIAwQAAIIAKHAABEAEABQAACg=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.Menu">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAEEAQAQAAQEgBBAQQAAUAEAEAABIAEgCRgQAAAA=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.Program">
+    <Position X="3.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.Protection">
+    <Position X="3.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>protection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceInvader.SpaceShip">
+    <Position X="8.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAEEqAAAYJEQAAAIAAAAAAAgAAAQAAAAAAEAAQAQ=</HashCode>
+      <FileName>spaceShip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
