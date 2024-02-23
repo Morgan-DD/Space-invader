@@ -1,0 +1,40 @@
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.AssemblyReference.cache
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.CoreCompileInputs.cache
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\spaceInvaderTestUnitaires.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\spaceInvaderTestUnitaires.pdb
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.exe
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.pdb
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.exe.config
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.CopyComplete
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.dll
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.pdb
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\spaceInvaderTestUnitaires.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\spaceInvaderTestUnitaires.pdb
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.exe
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.pdb
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\SpaceInvader.exe.config
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.AssemblyReference.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.CoreCompileInputs.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.csproj.CopyComplete
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.dll
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\spaceInvaderTestUnitaires\obj\Debug\spaceInvaderTestUnitaires.pdb

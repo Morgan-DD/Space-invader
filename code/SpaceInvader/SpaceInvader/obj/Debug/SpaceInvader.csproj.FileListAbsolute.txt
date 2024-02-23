@@ -1,0 +1,16 @@
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.exe.config
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.exe
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.pdb
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.AssemblyReference.cache
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.CoreCompileInputs.cache
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.exe
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.pdb
+C:\Users\pg66hua\Documents\GitHub\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.SuggestedBindingRedirects.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.exe.config
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.exe
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\bin\Debug\SpaceInvader.pdb
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.AssemblyReference.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.SuggestedBindingRedirects.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.csproj.CoreCompileInputs.cache
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.exe
+E:\2em année\1er trimestre\P-Dev\git\Space-invader\code\SpaceInvader\SpaceInvader\obj\Debug\SpaceInvader.pdb

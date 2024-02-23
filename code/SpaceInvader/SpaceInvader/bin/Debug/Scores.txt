@@ -1,0 +1,11 @@
+BNP : 100
+Jean : 200
+ayagros : 3200
+Alien : 200
+AmongUs : 200
+WompWomp : 1200
+wwww : 200
+Test: 200
+Gu: 200
+Test: 200
+prout: 200
